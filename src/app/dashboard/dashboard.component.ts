@@ -26,6 +26,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
     })
   }
 
+  
+
   ngOnInit() {
     
     this.exampleDataSubscription = this.db.list('/exampleData').valueChanges().subscribe(
@@ -33,6 +35,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.exampleData = exampleData;
         console.log(this.exampleData);
       });
+
+      
   }
 
   ngOnDestroy() {
