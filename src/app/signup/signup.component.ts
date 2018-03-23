@@ -3,7 +3,6 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from '@angular/router';
 import { moveIn, fallIn } from '../router.animations';
 
-import { DataService } from '../data.service';
 import { MakerspaceUser } from '../models/makerspace-user';
 
 @Component({
@@ -23,7 +22,7 @@ export class SignupComponent implements OnInit {
   password: string;
   displayName: string;
 
-  constructor(public afAuth: AngularFireAuth,private router: Router, private dataservice: DataService) {
+  constructor(public afAuth: AngularFireAuth,private router: Router) {
   }
 
   onSubmit(formData) {
