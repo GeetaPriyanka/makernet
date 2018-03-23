@@ -22,10 +22,11 @@ type PublicUserData extends Timestamped {
     id: String
     avatar: String | Null
     displayName: String
+    email: String
 	bio: String | Null
 
     validate() {
-        this.id == user_id && root.sites[this.affiliation] != null
+        this.id == user_id
     }
 }
 
@@ -35,5 +36,6 @@ path /users {
 }
 
 path /users/{user_id} is PublicUserData {
-    write() { isSelf(user_id) }
+    // write() { isSelf(user_id) }
+    write() { true }
 }

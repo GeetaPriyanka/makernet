@@ -1,15 +1,18 @@
-export class MakerspaceUser {
+import { Timestamped } from './timestamped';
+
+export class MakerspaceUser extends Timestamped {
   id: string;
-  name: string;
+  displayName: string;
   email: string;
-  photoUrl: string;
+  avatar: string;
   bio: string;
 
-  constructor(newName: string, newEmail: string, uid: string) {
-    this.id = uid;
-    this.name = newName;
-    this.email = newEmail;
-    this.photoUrl = null;
+  constructor() {
+    super();
+    this.id = null;
+    this.displayName = null;
+    this.email = null;
+    this.avatar = null;
     this.bio = null;
   }
 }

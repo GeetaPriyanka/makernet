@@ -13,21 +13,6 @@ export class DataService {
 
   constructor(private afAuth: AngularFireAuth, private db: AngularFireDatabase) { }
 
-  addUser(user: MakerspaceUser) {
-    let uid = user.id;
-
-    var newUserData = {};
-    newUserData[uid] = this.timestamp({
-      id: this.afAuth.auth.currentUser.uid,
-      avatar: user.photoUrl || '',
-      displayName: user.name || '',
-      bio: user.bio || '',
-    });
-    
-    this.db.object('/users').update(newUserData);
-
-  }
-
   timestamp(data) {
     data.updated_at = firebase.database.ServerValue.TIMESTAMP;
 

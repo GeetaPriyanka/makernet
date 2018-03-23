@@ -3,7 +3,6 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from '@angular/router';
 import { moveIn, fallIn } from '../router.animations';
 
-import { AuthGuard } from '../auth.service';
 import { DataService } from '../data.service';
 import { MakerspaceUser } from '../models/makerspace-user';
 
@@ -24,20 +23,12 @@ export class SignupComponent implements OnInit {
   password: string;
   displayName: string;
 
-  constructor(public afAuth: AngularFireAuth,private router: Router, private dataservice: DataService, public authGuard: AuthGuard) {
+  constructor(public afAuth: AngularFireAuth,private router: Router, private dataservice: DataService) {
   }
 
   onSubmit(formData) {
     if(formData.valid) {
       this.afAuth.auth.createUserWithEmailAndPassword(formData.value.email, formData.value.password).then(
-        (success) => {
-          /*this.newUser.name = this.displayName;
-          this.newUser.id = this.afAuth.auth.currentUser.uid;
-          this.newUser.email = this.email;
-          console.log("USER:" + this.newUser);
-          console.log("UID: " + this.afAuth.auth.currentUser.uid);
-          this.dataservice.addUser(this.newUser);*/
-      }).then(
         (success) => {
           this.router.navigate(['/dashboard']);
       }).catch(

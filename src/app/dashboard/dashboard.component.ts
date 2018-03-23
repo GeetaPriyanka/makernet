@@ -3,6 +3,9 @@ import { Subscription } from 'rxjs/Subscription';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { UserService } from '../user.service';
+import { User } from '@firebase/auth-types';
+import { MakerspaceUser } from '../models/makerspace-user';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,7 +17,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   exampleData: any;
   exampleDataSubscription: Subscription;
 
-  constructor(public afAuth: AngularFireAuth, private router: Router, public db: AngularFireDatabase) { }
+  constructor(public afAuth: AngularFireAuth, private router: Router, public db: AngularFireDatabase, private userService: UserService) { }
 
   logout() {
     this.afAuth.auth.signOut().then(
@@ -43,6 +46,22 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.exampleDataSubscription.unsubscribe();
   }
 
+  addUser() {
+    let newUser: MakerspaceUser = new MakerspaceUser();
+    newUser.displayName = this.afAuth.auth.currentUser.displayName;
+    newUser.email = this.afAuth.auth.currentUser.email;
+    newUser.avatar = this.afAuth.auth.currentUser.photoURL;
+    newUser.id = this.afAuth.auth.currentUser.uid;
+    this.userService.addUser(newUser);
+  }
 
+  user: MakerspaceUser;
+  getCurrentUser() {
+    this.user = this.userService.getCurrentUser();
+  }
+  updateUser() {
+    this.user.bio = "Test updating user bio";
+    this.user = this.userService.updateUser(this.user);
+  }
 
 }
