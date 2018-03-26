@@ -1,0 +1,31 @@
+<app-navbar></app-navbar>
+
+<div style="margin-top:120px" class="form-container">
+
+  <h5 class="modal-title" id="exampleModalLabel">Add Project</h5>
+
+
+
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)" >
+    <div>
+      <label>Title:</label>
+      <input type="text" placeholder="title" [(ngModel)]="project.title" name="title" />
+    </div>
+    <div>
+      <label>Desc:</label>
+      <input type="text" placeholder="Description" [(ngModel)]="project.description" name="desc" />
+    </div>
+    <div>
+      <input type="file" (change)="upload($event)" accept=".png,.jpg" />
+
+    </div>
+
+    <div>
+      <input type="submit" value="Submit" class="btn" />
+    </div>
+
+  </form>
+  
+
+</div>
+

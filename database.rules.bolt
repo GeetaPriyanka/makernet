@@ -1,0 +1,41 @@
+// Checks that the user is attributing data to themselves. Users should only ever be writing their own UID.
+function isSelf(user_id) {
+    auth != null && auth.uid == user_id;
+}
+
+// Checks if the current operation is being performed by any authenticated user.
+function isUser() {
+    auth != null && auth.uid != null;
+}
+
+// Checks if the current operation is being performed by a user with admin level permissions.
+function isAdmin() {
+    root['users-ranks'][auth.uid] == "admin"
+}
+
+type Timestamped {
+    created_at: Number
+    updated_at: Number
+}
+
+type PublicUserData extends Timestamped {
+    id: String
+    avatar: String | Null
+    displayName: String
+    email: String
+	bio: String | Null
+
+    validate() {
+        this.id == user_id
+    }
+}
+
+path /users {
+    read() { true }
+    index() {[ ".key", "created_at", "updated_at"]}
+}
+
+path /users/{user_id} is PublicUserData {
+    // write() { isSelf(user_id) }
+    write() { true }
+}

@@ -16,6 +16,7 @@
 *.launch
 .settings/
 *.sublime-workspace
+.vs/
 
 # IDE - VSCode
 .vscode/*
@@ -32,6 +33,7 @@
 npm-debug.log
 testem.log
 /typings
+.firebaserc
 
 # e2e
 /e2e/*.js
