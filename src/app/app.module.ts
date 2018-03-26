@@ -15,6 +15,8 @@ import { EmailComponent } from './email/email.component';
 import { SignupComponent } from './signup/signup.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuard } from './auth.service';
+import { DataService } from './data.service';
+import { UserService } from './user.service';
 import { routes } from './app.routes';
 
 
@@ -36,7 +38,10 @@ import { routes } from './app.routes';
     AngularFireDatabaseModule,
     routes
   ],
-  providers: [AuthGuard],
+  providers: [
+    AuthGuard, 
+    DataService, 
+    UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
