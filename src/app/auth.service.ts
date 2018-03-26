@@ -2,7 +2,6 @@ import { CanActivate, Router } from '@angular/router';
 import { AngularFireAuth } from "angularfire2/auth";
 import { AngularFireDatabase } from 'angularfire2/database';
 
-import { DataService } from './data.service';
 
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Rx";
