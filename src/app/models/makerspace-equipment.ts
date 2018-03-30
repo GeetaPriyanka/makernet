@@ -1,6 +1,12 @@
 import { MakerspaceReservable } from './makerspace-reservable';
 
 export class MakerspaceEquipment extends MakerspaceReservable {
-  manufacturer: String;
-  model: String;
+  manufacturer: string;
+  model: string;
+
+  constructor() {
+    super();
+    this.manufacturer = null;
+    this.model = null;
+  }
 }

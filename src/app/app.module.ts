@@ -17,7 +17,7 @@ import { EmailComponent } from './email/email.component';
 import { SignupComponent } from './signup/signup.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuard } from './auth.service';
-import { UserService } from './user.service';
+import { DataService } from './data.service';
 import { routes } from './app.routes';
 import { AppNavbarComponent } from './app-navbar/app-navbar.component';
 import { ProjectComponent } from './project/project.component';
@@ -48,7 +48,7 @@ import { ProjectComponent } from './project/project.component';
   ],
   providers: [
     AuthGuard,  
-    UserService],
+    DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

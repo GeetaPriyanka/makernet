@@ -3,7 +3,7 @@ import { MakerspaceUser } from './makerspace-user';
 
 export class MakerspaceReservation {
   owner: MakerspaceUser;
-  dateTime: String;
+  dateTime: string;
   duration: Number;
   reservedList: Array<MakerspaceReservable>;
 }

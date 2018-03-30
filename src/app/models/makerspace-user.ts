@@ -1,7 +1,6 @@
-import { Timestamped } from './timestamped';
+import { Viewable } from './viewable';
 
-export class MakerspaceUser extends Timestamped {
-  id: string;
+export class MakerspaceUser extends Viewable {
   displayName: string;
   email: string;
   avatar: string;
@@ -9,7 +8,6 @@ export class MakerspaceUser extends Timestamped {
 
   constructor() {
     super();
-    this.id = null;
     this.displayName = null;
     this.email = null;
     this.avatar = null;

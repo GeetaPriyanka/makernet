@@ -3,9 +3,9 @@ import { Subscription } from 'rxjs/Subscription';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { UserService } from '../user.service';
-import { User } from '@firebase/auth-types';
+import { DataService } from '../data.service';
 import { MakerspaceUser } from '../models/makerspace-user';
+import { MakerspaceEvent } from '../models/makerspace-event';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,7 +17,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   exampleData: any;
   exampleDataSubscription: Subscription;
 
-  constructor(public afAuth: AngularFireAuth, private router: Router, public db: AngularFireDatabase, private userService: UserService) { }
+  constructor(public afAuth: AngularFireAuth, private router: Router, public db: AngularFireDatabase, private ds: DataService) { }
 
   logout() {
     this.afAuth.auth.signOut().then(
@@ -52,16 +52,31 @@ export class DashboardComponent implements OnInit, OnDestroy {
     newUser.email = this.afAuth.auth.currentUser.email;
     newUser.avatar = this.afAuth.auth.currentUser.photoURL;
     newUser.id = this.afAuth.auth.currentUser.uid;
-    this.userService.addUser(newUser);
+    this.ds.addUser(newUser);
+  }
+
+  addEvent() {
+    let newEvent: MakerspaceEvent = new MakerspaceEvent();
+    newEvent.owner = this.ds.getCurrentUser().id;
+    newEvent.location = "HQ";
+    newEvent.start = "Monday";
+    newEvent.end = "Tuesday";
+    newEvent.description = "Test Event";
+    this.ds.addEvent(newEvent);
+  }
+
+  deleteEvent() {
+    this.ds.deleteEvent("-L8rUrJJ0i1S2vCTlHaW");
   }
 
   user: MakerspaceUser;
   getCurrentUser() {
-    this.user = this.userService.getCurrentUser();
+    this.user = this.ds.getCurrentUser();
   }
   updateUser() {
     this.user.bio = "Test updating user bio";
-    this.user = this.userService.updateUser(this.user);
+    this.ds.updateUser(this.user);
+    this.getCurrentUser();
   }
 
 }
