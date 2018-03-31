@@ -4,27 +4,55 @@
 <div id="wrapper">
 
 
-    <div width="" id="sidebar-wrapper">
+  <div width="" id="sidebar-wrapper">
 
-      <div style="width:100%;">
+    <div style="width:100%;">
 
-        <header>
-         <br>
-              <h4>All Projects</h4>
-              <ul class="sidebar-nav">
-                <li *ngFor="let project of projectData">
-                 <a (click)="showProject(project)">   {{project.title}} </a>     
-                </li>
-              </ul>
-          
-        </header>
-      </div>
+      <header>
+        <br>
+        <h4>All Projects</h4>
+        <ul class="sidebar-nav">
+          <li *ngFor="let project of projectData">
+            <a (click)="showProject(project)" onclick="document.getElementById('id01').style.display='block'">   {{project.title}} </a>
+          </li>
+        </ul>
+
+      </header>
     </div>
+  </div>
 
 
+  <div *ngIf="selected" >
+    console.log(project.title);
+    <div class="myModal" id="id01">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">{{selected.title}}</h3>
+
+          <button type="button" class="close" onclick="document.getElementById('id01').style.display='none'" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+
+        </div>
+        <div class="modal-body">
+
+         
+          <h4>Description:</h4>
+          <p>
+            {{selected.description}}
+          </p>
+          <h4>Images:</h4>
+
+          <img src="{{selected.imageUrl}}" class="img-responsive">
+        </div>
+
+      </div>
+      </div>
+  </div>
+ 
 
     <div id="page-content-wrapper" class="clearfix">
-      
+
       <div class="main main--projects">
 
         <section style="padding-bottom:100px;">

@@ -18,7 +18,6 @@ export class ProjectComponent implements OnInit {
   public firebase;
   public URL;
   public projects: MakerspaceProject[];
-
   selected: any[];
 
   submitEnabled: boolean = true;
