@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MakerspaceProject } from '../models/makerspace-project';
 import { AngularFireStorage } from 'angularfire2/storage';
 import { NgForm } from '@angular/forms';
+import { Subscription } from 'rxjs/Subscription';
 import { DataService } from '../data.service';
 
 
@@ -18,8 +19,11 @@ export class ProjectComponent implements OnInit {
   public URL;
   public projects: MakerspaceProject[];
 
-  submitEnabled: boolean = true;
+  selected: any[];
 
+  submitEnabled: boolean = true;
+  projectData: any;
+  projectDataSubscription: Subscription;
 
 
   project: MakerspaceProject = new MakerspaceProject();
@@ -28,6 +32,17 @@ export class ProjectComponent implements OnInit {
     this.firebase = this.angularFire.list('/projects');
   }
 
+
+  ngOnInit() {
+
+    this.projectDataSubscription = this.angularFire.list('/projects').valueChanges().subscribe(
+      projectData => {
+        this.projectData = projectData;
+        console.log(this.projectData);
+      });
+
+
+  }
 
   
   onSubmit(f: NgForm) {
@@ -56,9 +71,11 @@ export class ProjectComponent implements OnInit {
   toggleSubmitEnabled() {
     this.submitEnabled = !this.submitEnabled;
   }
-    ngOnInit() {
+  showProject(project) {
+    this.selected = project;
+    console.log(project.title);
+    console.log(project.description);
 
-   
-    }
+  }
   }
 
