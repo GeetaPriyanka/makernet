@@ -85,7 +85,8 @@ export class DataService {
   }
 
   uploadImage(image: File, callback: Function) {
-    let result = {url: '', success: false};
+    let result = { url: '', uid: '', success: false };
+
     if (image.type.match('image.*')) {
       this.afStorage.ref(this.uid + '/' + Math.random().toString(36)).put(image).then(
         image => {

@@ -22,8 +22,7 @@
   </div>
 
 
-  <div *ngIf="selected" >
-    console.log(project.title);
+  <div *ngIf="selected">
     <div class="myModal" id="id01">
       <div class="modal-content">
         <div class="modal-header">
@@ -36,63 +35,96 @@
         </div>
         <div class="modal-body">
 
-         
           <h4>Description:</h4>
           <p>
             {{selected.description}}
           </p>
+
           <h4>Images:</h4>
-
           <img src="{{selected.imageUrl}}" class="img-responsive">
-        </div>
-
-      </div>
-      </div>
-  </div>
- 
-
-    <div id="page-content-wrapper" class="clearfix">
-
-      <div class="main main--projects">
-
-        <section style="padding-bottom:100px;">
-          <div style="margin-top:120px" class="form-container">
-
-            <h5 class="modal-title" id="exampleModalLabel">Add Project</h5>
-
-
-
-            <form #f="ngForm" (ngSubmit)="onSubmit(f)">
-              <div>
-                <label>Title:</label>
-                <input type="text" placeholder="title" [(ngModel)]="project.title" name="title" />
-              </div>
-              <div>
-                <label>Desc:</label>
-                <input type="text" placeholder="Description" [(ngModel)]="project.description" name="desc" />
-              </div>
-              <div>
-                <input type="file" (change)="upload($event)" accept=".png,.jpg" />
-
-              </div>
-
-              <div *ngIf="!submitEnabled" class="progress progress-striped active">
-                <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                  Uploading...
-                </div>
-              </div>
-
-              <div>
-                <button class="btn btn-success" [disabled]="!submitEnabled" (click)="onSubmit">Submit</button>
-              </div>
-
-            </form>
-
-
+          <br />
+          <div>
+            <button id="updatebutton" class="btn btn-info" [disabled]="!submitEnabled" (click)="updateProject(selected)" onclick="document.getElementById('id01').style.display = 'none'; document.getElementById('id02').style.display = 'block'">Update Project</button>
           </div>
-        </section>
-        <div style="height:250px;"></div>
+         
+        </div>
       </div>
     </div>
+  </div>
+
+  <div *ngIf="toUpdate">
+    <div class="myModal" id="id02">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">{{toUpdate.title}}</h3>
+
+          <button type="button" class="close" onclick="document.getElementById('id02').style.display='none'" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+
+        </div>
+        <div class="modal-body">
+          <div>
+            <label>Title:</label>
+            <input type="text" [(ngModel)]="toUpdate.title" name="title" />
+          </div>
+          <div>
+            <label>Desc:</label>
+            <input type="text" [(ngModel)]="toUpdate.description" name="desc" />
+          </div>
+          <div>
+            <button class="btn btn-success" [disabled]="!submitEnabled" onclick="document.getElementById('id02').style.display = 'none'" (click)="onSubmitUpdate()">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+ 
+
+  <div id="page-content-wrapper" >
+
+    <div class="main main--projects">
+
+      <section style="padding-bottom:100px;">
+        <div style="margin-top:120px" class="form-container">
+
+          <h5 class="modal-title" id="exampleModalLabel">Add Project</h5>
+
+
+
+          <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+            <div>
+              <label>Title:</label>
+              <input type="text" placeholder="title" [(ngModel)]="project.title" name="title" />
+            </div>
+            <div>
+              <label>Desc:</label>
+              <input type="text" placeholder="Description" [(ngModel)]="project.description" name="desc" />
+            </div>
+            <div>
+              <input type="file" (change)="upload($event)" accept=".png,.jpg" />
+
+            </div>
+
+            <div *ngIf="!submitEnabled" class="progress progress-striped active">
+              <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                Uploading...
+              </div>
+            </div>
+
+            <div>
+              <button class="btn btn-success" [disabled]="!submitEnabled" (click)="onSubmit">Submit</button>
+            </div>
+
+          </form>
+
+
+        </div>
+      </section>
+      <div style="height:250px;"></div>
+    </div>
+  </div>
 </div>
 

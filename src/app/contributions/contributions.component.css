@@ -1,0 +1,13 @@
+#page-content-wrapper {
+  width: 100%;
+  position: absolute;
+  padding: 100px;
+}
+#wrapper {
+  padding-left: 0;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  margin-top: 0px;
+}

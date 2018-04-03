@@ -4,3 +4,8 @@
   right: 0;
 }
 
+
+.nav a:hover {
+  background-color: #019fc2;
+}
+

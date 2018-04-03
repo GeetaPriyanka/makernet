@@ -8,6 +8,7 @@ import { AuthGuard } from './auth.service';
 import { SignupComponent } from './signup/signup.component';
 import { EmailComponent } from './email/email.component';
 import { ProjectComponent } from './project/project.component';
+import { ContributionsComponent } from './contributions/contributions.component';
 
 
 export const router: Routes = [
@@ -16,6 +17,7 @@ export const router: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'login-email', component: EmailComponent },
   { path: 'project', component: ProjectComponent },
+  { path: 'contributions', component: ContributionsComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] }
 
 ]

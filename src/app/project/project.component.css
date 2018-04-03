@@ -92,3 +92,10 @@
     text-decoration: none;
     cursor: pointer;
   }
+
+
+#updatebutton, #contributeToProject {
+  display: inline-block;
+  vertical-align: top;
+  /**other codes**/
+}

@@ -5,6 +5,7 @@ import { AngularFireStorage } from 'angularfire2/storage';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { DataService } from '../data.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -19,14 +20,18 @@ export class ProjectComponent implements OnInit {
   public URL;
   public projects: MakerspaceProject[];
   selected: any[];
-
+  toUpdate: any;
+  contribute: any;
   submitEnabled: boolean = true;
   projectData: any;
   projectDataSubscription: Subscription;
+  item: any[];
 
 
   project: MakerspaceProject = new MakerspaceProject();
-  constructor(private angularFire: AngularFireDatabase, private afStorage: AngularFireStorage, private ds: DataService) {
+  update: MakerspaceProject = new MakerspaceProject();
+
+  constructor(private angularFire: AngularFireDatabase, private afStorage: AngularFireStorage, private ds: DataService, private router: Router) {
 
     this.firebase = this.angularFire.list('/projects');
   }
@@ -58,6 +63,7 @@ export class ProjectComponent implements OnInit {
      this.project = new MakerspaceProject();
   }
 
+ 
   upload(event) {
     this.toggleSubmitEnabled();
     let upload = this.ds.uploadImage(event.target.files[0], 
@@ -72,9 +78,24 @@ export class ProjectComponent implements OnInit {
   }
   showProject(project) {
     this.selected = project;
-    console.log(project.title);
-    console.log(project.description);
+    console.log(this.selected);
 
   }
+
+  updateProject(project) {
+
+    this.toUpdate = project;
+    console.log(this.toUpdate);
+
+  }
+
+  onSubmitUpdate() {
+    console.log(this.toUpdate);
+    this.ds.updateProject(this.toUpdate);
+
+  }
+
+ 
+
   }
 

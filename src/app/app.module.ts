@@ -21,6 +21,7 @@ import { DataService } from './data.service';
 import { routes } from './app.routes';
 import { AppNavbarComponent } from './app-navbar/app-navbar.component';
 import { ProjectComponent } from './project/project.component';
+import { ContributionsComponent } from './contributions/contributions.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { ProjectComponent } from './project/project.component';
     SignupComponent,
     DashboardComponent,
     AppNavbarComponent,
-    ProjectComponent
+    ProjectComponent,
+    ContributionsComponent
   ],
   imports: [
     BrowserModule,
