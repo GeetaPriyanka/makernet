@@ -9,6 +9,7 @@ import { SignupComponent } from './signup/signup.component';
 import { EmailComponent } from './email/email.component';
 import { ProjectComponent } from './project/project.component';
 import { ContributionsComponent } from './contributions/contributions.component';
+import { ItemsComponent } from './items/items.component';
 
 
 export const router: Routes = [
@@ -18,7 +19,8 @@ export const router: Routes = [
   { path: 'login-email', component: EmailComponent },
   { path: 'project', component: ProjectComponent },
   { path: 'contributions', component: ContributionsComponent },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] }
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'items', component: ItemsComponent }
 
 ]
 

@@ -24,6 +24,12 @@ import { ProjectComponent } from './project/project.component';
 import { ContributionsComponent } from './contributions/contributions.component';
 
 
+//Items
+import { ItemsComponent } from './items/items.component';
+import { ItemService } from './item.service';
+import { AddItemComponent } from './add-item/add-item.component';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +39,9 @@ import { ContributionsComponent } from './contributions/contributions.component'
     DashboardComponent,
     AppNavbarComponent,
     ProjectComponent,
-    ContributionsComponent
+    ContributionsComponent,
+    ItemsComponent,
+    AddItemComponent
   ],
   imports: [
     BrowserModule,
@@ -45,12 +53,14 @@ import { ContributionsComponent } from './contributions/contributions.component'
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     AngularFireStorageModule,
+    AngularFirestoreModule,
     NgbModule.forRoot(),
     routes
   ],
   providers: [
     AuthGuard,  
-    DataService],
+    DataService,
+    ItemService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
