@@ -10,6 +10,7 @@ import { EmailComponent } from './email/email.component';
 import { ProjectComponent } from './project/project.component';
 import { ContributionsComponent } from './contributions/contributions.component';
 import { ItemsComponent } from './items/items.component';
+import { GalleryComponent } from './gallery/gallery.component';
 
 
 export const router: Routes = [
@@ -20,7 +21,8 @@ export const router: Routes = [
   { path: 'project', component: ProjectComponent },
   { path: 'contributions', component: ContributionsComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-  { path: 'items', component: ItemsComponent }
+  { path: 'items', component: ItemsComponent },
+  { path: 'gallery1', component:  GalleryComponent}
 
 ]
 

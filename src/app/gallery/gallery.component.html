@@ -1,0 +1,22 @@
+<app-navbar></app-navbar>
+
+<h1>Photo Galary</h1>
+<input type="file" (change) = "featuredPhotoSelected($event,'url1')"><br>
+<img *ngIf="(featuredPhotoStream | async)?.url1 as url" [src] ="url" alt="a photo 1"> 
+<hr>
+<input type="file" (change) = "featuredPhotoSelected($event,'url2')"><br>
+<img *ngIf="(featuredPhotoStream | async)?.url2 as url" [src] ="url" alt="a photo 1"> 
+
+<hr>
+
+<h1>Photo List</h1>
+<input type="file" (change) = "photoImageList($event)"><br>
+<img *ngFor="let Photo of photoListStream | async " [src] ="Photo.url" alt="a photo in list"> 
+<hr>
+
+<!-- <body>
+<div class="container">
+    <app-employee></app-employee>
+
+</div>
+</body> -->
