@@ -1,6 +1,6 @@
 import { Timestamped } from "./timestamped";
 
-export abstract class Viewable extends Timestamped {
+export class MakerspaceImage extends Timestamped {
   imageUrl: string;
   galleryIds: Array<string>;
 

@@ -22,7 +22,7 @@ import { routes } from './app.routes';
 import { AppNavbarComponent } from './app-navbar/app-navbar.component';
 import { ProjectComponent } from './project/project.component';
 import { ContributionsComponent } from './contributions/contributions.component';
-import {GalleryComponent} from  './gallery/gallery.component';
+import { GalleryComponent } from  './gallery/gallery.component';
 
 
 //Items
@@ -44,7 +44,6 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
     ItemsComponent,
     AddItemComponent,
     GalleryComponent
-
   ],
   imports: [
     BrowserModule,
@@ -64,6 +63,6 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
     AuthGuard,  
     DataService,
     ItemService],
-  bootstrap: [AppComponent]
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
