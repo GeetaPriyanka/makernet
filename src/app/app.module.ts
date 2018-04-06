@@ -23,6 +23,7 @@ import { AppNavbarComponent } from './app-navbar/app-navbar.component';
 import { ProjectComponent } from './project/project.component';
 import { ContributionsComponent } from './contributions/contributions.component';
 import { GalleryComponent } from  './gallery/gallery.component';
+import { TestingComponent } from './testing/testing.component';
 
 
 //Items
@@ -43,7 +44,8 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
     ContributionsComponent,
     ItemsComponent,
     AddItemComponent,
-    GalleryComponent
+    GalleryComponent,
+    TestingComponent
   ],
   imports: [
     BrowserModule,

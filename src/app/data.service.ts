@@ -18,6 +18,7 @@ import { MakerspaceUser } from './models/makerspace-user';
 import { Timestamped } from './models/timestamped';
 import { MakerspaceGallery } from './models/makerspace-gallery';
 import { MakerspaceImage } from './models/makerspace-image';
+import { MakerspaceSpace } from './models/makerspace-space';
 
 @Injectable()
 export class DataService {
@@ -60,7 +61,7 @@ export class DataService {
   }
 
   getEvent(eventId: string): Observable<MakerspaceEvent> {
-    return this.getDbObject<MakerspaceEvent>('/events' + eventId); //this.db.object<MakerspaceEvent>('/events' + eventId).valueChanges();
+    return this.getDbObject<MakerspaceEvent>('/events' + eventId);
   }
 
   listEvents(): Observable<MakerspaceEvent[]> {
@@ -91,6 +92,26 @@ export class DataService {
     return this.getDbList<MakerspaceEquipment>('/equipment');
   }
 
+  addSpace(space: MakerspaceSpace) {
+    this.update('/spaces', this.prepareUpdate(space));
+  }
+
+  deleteSpace(id: string) {
+    this.db.object('/spaces' + id).remove();
+  }
+
+  updateSpace(space: MakerspaceSpace) {
+    this.update('/spaces', this.prepareUpdate(space));
+  }
+
+  getSpace(spaceId: string): Observable<MakerspaceSpace> {
+    return this.getDbObject<MakerspaceSpace>('/spaces' + spaceId);
+  }
+
+  listSpaces(): Observable<MakerspaceSpace[]> {
+    return this.getDbList<MakerspaceSpace>('/spaces');
+  }
+
   addProject(project: MakerspaceProject) {
     this.update('/projects', this.prepareUpdate(project));
   }
@@ -101,6 +122,14 @@ export class DataService {
 
   updateProject(project: MakerspaceProject) {
     this.update('/projects', this.prepareUpdate(project));
+  }
+
+  getProject(projectId: string): Observable<MakerspaceProject> {
+    return this.getDbObject<MakerspaceProject>('/projects' + projectId);
+  }
+
+  listProjects(): Observable<MakerspaceProject[]> {
+    return this.getDbList<MakerspaceProject>('/projects');
   }
 
   addGallery(gallery: MakerspaceGallery) {
