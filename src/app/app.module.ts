@@ -9,8 +9,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
-
+import { NgSrcModule } from 'ng-src';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { EmailComponent } from './email/email.component';
@@ -30,6 +29,7 @@ import { ItemsComponent } from './items/items.component';
 import { ItemService } from './item.service';
 import { AddItemComponent } from './add-item/add-item.component';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -43,11 +43,15 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
     ContributionsComponent,
     ItemsComponent,
     AddItemComponent,
-    GalleryComponent
+    GalleryComponent,
+    UserProfileComponent
 
   ],
+  
+
   imports: [
     BrowserModule,
+    NgSrcModule,
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
