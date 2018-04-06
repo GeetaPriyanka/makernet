@@ -21,7 +21,8 @@ import { routes } from './app.routes';
 import { AppNavbarComponent } from './app-navbar/app-navbar.component';
 import { ProjectComponent } from './project/project.component';
 import { ContributionsComponent } from './contributions/contributions.component';
-import {GalleryComponent} from  './gallery/gallery.component';
+import { GalleryComponent } from  './gallery/gallery.component';
+import { TestingComponent } from './testing/testing.component';
 
 
 //Items
@@ -44,8 +45,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     ItemsComponent,
     AddItemComponent,
     GalleryComponent,
-    UserProfileComponent
-
+    TestingComponent
   ],
   
 
@@ -68,6 +68,6 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     AuthGuard,  
     DataService,
     ItemService],
-  bootstrap: [AppComponent]
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

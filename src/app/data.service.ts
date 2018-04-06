@@ -9,12 +9,16 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/take';
 import { Subscription } from 'rxjs/Subscription';
+import { Observable } from 'rxjs/Observable'
 
 import { MakerspaceEvent } from './models/makerspace-event';
 import { MakerspaceEquipment } from './models/makerspace-equipment';
 import { MakerspaceProject } from './models/makerspace-project';
 import { MakerspaceUser } from './models/makerspace-user';
 import { Timestamped } from './models/timestamped';
+import { MakerspaceGallery } from './models/makerspace-gallery';
+import { MakerspaceImage } from './models/makerspace-image';
+import { MakerspaceSpace } from './models/makerspace-space';
 
 @Injectable()
 export class DataService {
@@ -56,6 +60,14 @@ export class DataService {
     this.db.object('/events/' + id).remove();
   }
 
+  getEvent(eventId: string): Observable<MakerspaceEvent> {
+    return this.getDbObject<MakerspaceEvent>('/events' + eventId);
+  }
+
+  listEvents(): Observable<MakerspaceEvent[]> {
+    return this.getDbList<MakerspaceEvent>('/events');
+  }
+
   updateEvent(msEvent: MakerspaceEvent) {
     this.update('/events', this.prepareUpdate(msEvent));
   }
@@ -72,6 +84,34 @@ export class DataService {
     this.update('/equipment', this.prepareUpdate(equipment));
   }
 
+  getEquipment(equipmentId: string): Observable<MakerspaceEquipment> {
+    return this.getDbObject<MakerspaceEquipment>('/equipment' + equipmentId);
+  }
+
+  listEquipment(): Observable<MakerspaceEquipment[]> {
+    return this.getDbList<MakerspaceEquipment>('/equipment');
+  }
+
+  addSpace(space: MakerspaceSpace) {
+    this.update('/spaces', this.prepareUpdate(space));
+  }
+
+  deleteSpace(id: string) {
+    this.db.object('/spaces' + id).remove();
+  }
+
+  updateSpace(space: MakerspaceSpace) {
+    this.update('/spaces', this.prepareUpdate(space));
+  }
+
+  getSpace(spaceId: string): Observable<MakerspaceSpace> {
+    return this.getDbObject<MakerspaceSpace>('/spaces' + spaceId);
+  }
+
+  listSpaces(): Observable<MakerspaceSpace[]> {
+    return this.getDbList<MakerspaceSpace>('/spaces');
+  }
+
   addProject(project: MakerspaceProject) {
     this.update('/projects', this.prepareUpdate(project));
   }
@@ -84,11 +124,41 @@ export class DataService {
     this.update('/projects', this.prepareUpdate(project));
   }
 
+  getProject(projectId: string): Observable<MakerspaceProject> {
+    return this.getDbObject<MakerspaceProject>('/projects' + projectId);
+  }
+
+  listProjects(): Observable<MakerspaceProject[]> {
+    return this.getDbList<MakerspaceProject>('/projects');
+  }
+
+  addGallery(gallery: MakerspaceGallery) {
+    this.update('/galleries', this.prepareUpdate(gallery));
+  }
+
+  updateGallery(gallery: MakerspaceGallery) {
+    this.update('/galleries', this.prepareUpdate(gallery));
+  }
+
+  addImageToGallery(image: File, galleryId: string) {
+    let newImage = new MakerspaceImage();
+    this.uploadImage(image, (result) => {
+      newImage.imageUrl = result;
+    }).then(() => {
+      this.db.list('/galleries' + galleryId).push(this.timestamp(newImage));
+    });
+  }
+
+  getGallery(galleryId: string): Observable<MakerspaceGallery> {
+    return this.db.object<MakerspaceGallery>('/galleries' + galleryId).valueChanges();
+  }
+
   uploadImage(image: File, callback: Function) {
     let result = { url: '', uid: '', success: false };
+    let task: Promise<any>;
 
     if (image.type.match('image.*')) {
-      this.afStorage.ref(this.uid + '/' + Math.random().toString(36)).put(image).then(
+      task =  this.afStorage.ref(this.uid + '/' + Math.random().toString(36)).put(image).then(
         image => {
           result.url = image.downloadURL;
           result.success = true;
@@ -96,6 +166,8 @@ export class DataService {
         }
       )
     }
+
+    return task;
   }
 
   private timestamp(data: Timestamped) {
@@ -113,6 +185,7 @@ export class DataService {
       (data instanceof MakerspaceUser) ?
         data.id = this.uid : data.id = this.db.createPushId();
     }
+    data.owner = this.uid;
     
     let update = {};
     update[data.id] = this.timestamp(data);
@@ -132,6 +205,14 @@ export class DataService {
 
   private update(location: string, update: Object) {
     if (update) this.db.object(location).update(update);
+  }
+
+  private getDbObject<T>(path: string): Observable<T> {
+    return this.db.object<T>(path).valueChanges();
+  } 
+
+  private getDbList<T>(path: string): Observable<T[]> {
+    return this.db.list<T>(path).valueChanges();
   }
 
 }
