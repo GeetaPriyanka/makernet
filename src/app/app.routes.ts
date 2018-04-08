@@ -10,6 +10,9 @@ import { EmailComponent } from './email/email.component';
 import { ProjectComponent } from './project/project.component';
 import { ContributionsComponent } from './contributions/contributions.component';
 import { MakerSpaceReservationComponent } from './maker-space-reservation/maker-space-reservation.component';
+import { ItemsComponent } from './items/items.component';
+import { GalleryComponent } from './gallery/gallery.component';
+import { TestingComponent } from './testing/testing.component';
 
 
 export const router: Routes = [
@@ -20,7 +23,11 @@ export const router: Routes = [
   { path: 'project', component: ProjectComponent },
   { path: 'contributions', component: ContributionsComponent },
   { path: 'reservation', component: MakerSpaceReservationComponent },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] }
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'items', component: ItemsComponent },
+  { path: 'gallery1', component:  GalleryComponent},
+  { path: 'testing', component: TestingComponent }
 
 ]
 

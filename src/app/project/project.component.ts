@@ -48,6 +48,8 @@ export class ProjectComponent implements OnInit {
 
   }
 
+
+
   
   onSubmit(f: NgForm) {
     console.log(this.project);

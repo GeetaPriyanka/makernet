@@ -1,0 +1,26 @@
+<div class="card">
+  <div class="card-content">
+    <span class="card-title"> Add Event </span>
+    <form (ngSubmit)="onSubmit()" class="col s6">
+      <div class=row>
+        <div>
+            <label>Title of event</label>
+          <input type="text" placeholder="Add Title"[(ngModel)]="item.title" name="title">
+          
+        </div>
+        <div>
+            <label>Description of event</label>
+            <input type="text" placeholder="Add Description"[(ngModel)]="item.description" name="description">
+            
+          </div>
+          <div>
+              <label>Date of event</label>
+            <input type="date"[(ngModel)]="item.date" name="date">
+            
+          </div>
+          <input type="submit" value="Submit" class="btn">
+      </div>
+    </form>
+
+  </div>
+</div>

@@ -12,6 +12,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarComponent } from "ap-angular2-fullcalendar/src/calendar/calendar";
 
 
+import { NgSrcModule } from 'ng-src';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { EmailComponent } from './email/email.component';
@@ -24,7 +25,16 @@ import { AppNavbarComponent } from './app-navbar/app-navbar.component';
 import { ProjectComponent } from './project/project.component';
 import { ContributionsComponent } from './contributions/contributions.component';
 import { MakerSpaceReservationComponent } from './maker-space-reservation/maker-space-reservation.component';
+import { GalleryComponent } from  './gallery/gallery.component';
+import { TestingComponent } from './testing/testing.component';
 
+
+//Items
+import { ItemsComponent } from './items/items.component';
+import { ItemService } from './item.service';
+import { AddItemComponent } from './add-item/add-item.component';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -37,10 +47,17 @@ import { MakerSpaceReservationComponent } from './maker-space-reservation/maker-
     ProjectComponent,
     ContributionsComponent,
     CalendarComponent,
-    MakerSpaceReservationComponent
+    MakerSpaceReservationComponent,
+    ItemsComponent,
+    AddItemComponent,
+    GalleryComponent,
+    TestingComponent
   ],
+  
+
   imports: [
     BrowserModule,
+    NgSrcModule,
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
@@ -49,12 +66,14 @@ import { MakerSpaceReservationComponent } from './maker-space-reservation/maker-
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     AngularFireStorageModule,
+    AngularFirestoreModule,
     NgbModule.forRoot(),
     routes
   ],
   providers: [
     AuthGuard,
-    DataService],
+    DataService,
+    ItemService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
