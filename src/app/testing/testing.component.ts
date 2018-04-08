@@ -20,13 +20,7 @@ export class TestingComponent implements OnInit {
   constructor(public afAuth: AngularFireAuth, private router: Router, public db: AngularFireDatabase, private ds: DataService) { }
 
   logout() {
-    this.afAuth.auth.signOut().then(
-      (success) => {
-      this.router.navigate(['/login']);
-    }).catch(
-      (err) => {
-      //this.error = err;
-    })
+    this.ds.logout();
   }
 
   

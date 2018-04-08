@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,7 +11,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 })
 export class AppNavbarComponent implements OnInit {
 
-  constructor(public afAuth: AngularFireAuth, private router: Router, public db: AngularFireDatabase, private el: ElementRef) { }
+  constructor(private el: ElementRef, private ds: DataService) { }
 
   spacerHeight: string;
 
@@ -24,13 +25,7 @@ export class AppNavbarComponent implements OnInit {
   }
 
   logout() {
-    this.afAuth.auth.signOut().then(
-      (success) => {
-        this.router.navigate(['/login']);
-      }).catch(
-      (err) => {
-        //this.error = err;
-      })
+    this.ds.logout();
   }
 
   private resizeSpacer() {
