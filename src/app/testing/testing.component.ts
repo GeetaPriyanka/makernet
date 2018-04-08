@@ -50,7 +50,7 @@ export class TestingComponent implements OnInit {
     let newUser: MakerspaceUser = new MakerspaceUser();
     newUser.displayName = this.afAuth.auth.currentUser.displayName;
     newUser.email = this.afAuth.auth.currentUser.email;
-    newUser.avatar = this.afAuth.auth.currentUser.photoURL;
+    newUser.imageUrl = this.afAuth.auth.currentUser.photoURL;
     newUser.id = this.afAuth.auth.currentUser.uid;
     this.ds.addUser(newUser);
   }
