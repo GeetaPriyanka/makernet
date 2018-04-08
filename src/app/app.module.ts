@@ -12,7 +12,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarComponent } from "ap-angular2-fullcalendar/src/calendar/calendar";
 
 
-import { NgSrcModule } from 'ng-src';
+//import { NgSrcModule } from 'ng-src';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { EmailComponent } from './email/email.component';
@@ -57,7 +57,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 
   imports: [
     BrowserModule,
-    NgSrcModule,
+  //  NgSrcModule,
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,

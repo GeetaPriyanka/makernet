@@ -13,10 +13,10 @@ h3{
     font-size: 30px;
 }
 
-body{
-    background-image: url("app/images/pencil.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
+body {
+  /*   background-image: url("app/images/pencil.jpg");*/
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 #test1{

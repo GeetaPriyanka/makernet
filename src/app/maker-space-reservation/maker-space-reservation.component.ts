@@ -71,7 +71,7 @@ export class MakerSpaceReservationComponent implements OnInit {
           this.count += 1;
         }
         else 
-          this.availableList.push(new MakerspaceSpace("Space1", 4, "Woodward 334", this.time, this.searchForReservation.date);
+          this.availableList.push(new MakerspaceSpace("Space1", 4, "Woodward 334", this.time, this.searchForReservation.date));
 
        
       }));
@@ -83,7 +83,7 @@ export class MakerSpaceReservationComponent implements OnInit {
           this.count += 1;
         }
         else
-          this.availableList.push(new MakerspaceSpace("Space2", 5, "Woodward 334", this.time, this.searchForReservation.date);
+          this.availableList.push(new MakerspaceSpace("Space2", 5, "Woodward 334", this.time, this.searchForReservation.date));
       }));
     this.SpaceSubscription = this.angularFire.list('/Reservation/Space3/').valueChanges().subscribe(
       space3 => space3.forEach(item => {
@@ -93,7 +93,7 @@ export class MakerSpaceReservationComponent implements OnInit {
 
         }
         else
-          this.availableList.push(new MakerspaceSpace("Space3", 2, "Woodward 334", this.time, this.searchForReservation.date);
+          this.availableList.push(new MakerspaceSpace("Space3", 2, "Woodward 334", this.time, this.searchForReservation.date));
       }));
 
     this.SpaceSubscription = this.angularFire.list('/Reservation/Space4/').valueChanges().subscribe(
@@ -103,7 +103,7 @@ export class MakerSpaceReservationComponent implements OnInit {
           this.count += 1;
         }
         else
-          this.availableList.push(new MakerspaceSpace("Space4", 4, "Woodward 334", this.time, this.searchForReservation.date);
+          this.availableList.push(new MakerspaceSpace("Space4", 4, "Woodward 334", this.time, this.searchForReservation.date));
       
         console.log(this.count);
         if (this.count == 4) {

@@ -93,7 +93,7 @@ export class DataService {
   }
 
   addSpace(space: MakerspaceSpace) {
-    this.update('/spaces', this.prepareUpdate(space));
+  //  this.update('/spaces', this.prepareUpdate(space));
   }
 
   deleteSpace(id: string) {
@@ -101,7 +101,7 @@ export class DataService {
   }
 
   updateSpace(space: MakerspaceSpace) {
-    this.update('/spaces', this.prepareUpdate(space));
+  //  this.update('/spaces', this.prepareUpdate(space));
   }
 
   getSpace(spaceId: string): Observable<MakerspaceSpace> {
