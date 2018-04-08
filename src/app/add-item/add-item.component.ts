@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ItemService } from '../item.service';
+import { DataService } from '../data.service';
+import { MakerspaceEvent } from '../models/makerspace-event';
 import { Item } from '../models/Item';
 
 @Component({
@@ -10,12 +12,11 @@ import { Item } from '../models/Item';
 export class AddItemComponent implements OnInit {
   dateAdded: any;
   firebaseService: any;
-  item: Item = {
-    title: '',
-    description:'',
-    date:''
+  event: MakerspaceEvent;
+
+  constructor(private ds: DataService) { 
+    this.event = new MakerspaceEvent();
   }
-  constructor(private itemService: ItemService) { }
 
   ngOnInit() {
   }
@@ -25,11 +26,9 @@ export class AddItemComponent implements OnInit {
   }
 
   onSubmit(){
-    if(this.item.title !='' && this.item.description != ''){
-      this.itemService.addItem(this.item);
-      this.item.title='';
-      this.item.description='';
-      this.item.date='';
+    if(this.event.title !='' && this.event.description != ''){
+      this.ds.addEvent(this.event);
+      this.event = new MakerspaceEvent();
       
     }
   }

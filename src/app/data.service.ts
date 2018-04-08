@@ -195,11 +195,11 @@ export class DataService {
   }
 
   private hasEmptyProperty(data: Timestamped) {
-    for (let prop of Object.getOwnPropertyNames(data)) {
+    /* for (let prop of Object.getOwnPropertyNames(data)) {
       if (!data[prop]) {
         return true;
       }
-    }
+    } */
     return false;
   }
 

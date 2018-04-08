@@ -1,6 +1,7 @@
 import { Viewable } from './viewable';
 
 export class MakerspaceEvent extends Viewable {
+  title: string;
   owner: string;
   description: string;
   start: string;
@@ -9,6 +10,7 @@ export class MakerspaceEvent extends Viewable {
 
   constructor() {
     super();
+    this.title = null;
     this.owner = null;
     this.description = null;
     this.start = null;
