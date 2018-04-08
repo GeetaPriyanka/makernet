@@ -9,10 +9,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { CalendarComponent } from "ap-angular2-fullcalendar/src/calendar/calendar";
 
-
-//import { NgSrcModule } from 'ng-src';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { EmailComponent } from './email/email.component';
@@ -46,7 +43,6 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     AppNavbarComponent,
     ProjectComponent,
     ContributionsComponent,
-    CalendarComponent,
     MakerSpaceReservationComponent,
     ItemsComponent,
     AddItemComponent,

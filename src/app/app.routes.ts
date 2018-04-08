@@ -17,6 +17,7 @@ import { TestingComponent } from './testing/testing.component';
 
 export const router: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'logout', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'login-email', component: EmailComponent },
