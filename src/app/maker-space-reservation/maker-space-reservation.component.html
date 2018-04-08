@@ -1,0 +1,80 @@
+<app-navbar></app-navbar>
+<div id='mainpage' ng-style="{'background-color':white}">
+  <div class="row">
+    <div class="column" style="background-color:#008080;">
+      <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <div id='optionsHeader'>
+          <h3 id='optionsHeading'>Search for available spaces</h3>
+        </div>
+        <div id='options_one'>
+          <div id='options_one_inner'>
+            <h3 class='inner_title'>
+              Date:
+            </h3>
+            <div style="display: inline-block">
+
+              <input type='date' id='search_date' name='date' [ngModel]="searchForReservation.date | date:'mm/dd/yyyy'" (ngModelChange)="searchForReservation.date = $event" placeholder='Select a date...' value='04/06/18' />
+            </div>
+
+            <h3 class='inner_title'>
+              Time:
+            </h3>
+            <div style="display: inline-block">
+              <select id='search_start_time_hr' name='search_start_time_hr' [(ngModel)]="searchForReservation.hour" class='searchtime'><option value='1'>1</option><option value='2'>2</option><option value='3' selected>3</option><option value='4'>4</option><option value='5'>5</option><option value='6'>6</option></select>
+            </div>
+            <div style="display: inline-block">
+              <select id='search_start_time_min' name='search_start_time_min' [(ngModel)]="searchForReservation.min" class='searchtime'>
+                <option value='00'>00</option>
+                <option value='30' selected>30</option>
+              </select>
+            </div>
+            <div style="display: inline-block">
+
+              <select id='search_start_time_ampm' name='search_start_time_ampm' class='searchtime'>
+                <option value='PM' selected>PM</option>
+              </select>
+            </div>
+
+            <input type='text' id='capacity_selected_val' value='1' class='hide' hidden style='display: none;' />
+          </div>
+          <br>
+          <button class="btn btn-default" (click)="onSubmit">Search</button>
+        </div>
+      </form>
+    </div>
+    <div class="column">
+
+      <div *ngIf="noRooms" class="alert alert-primary" role="alert">
+
+        "No rooms availabe at this time. Please select another date/time"
+
+      </div>
+
+      <div *ngIf="availableRooms">
+        <table>
+          <tr *ngFor="let available of availableRooms">
+            <td class="form-group">
+              <div>Space: {{available.space}}</div>
+              <div>Capacity: {{available.capacity}}</div>
+              <div>Location: {{available.location}}</div>
+              <div>Date: {{available.date}}</div>
+              <div>Time: {{available.time}}</div>
+              <div>
+                <button type="button" style="background-color:#008080;" (click)="onSubmitReserve()">Reserve</button>
+              </div>
+
+            </td>
+            <td>
+             
+            </td>
+
+          </tr>
+        </table>
+      </div>
+
+    </div>
+
+    
+
+  </div>
+  </div>

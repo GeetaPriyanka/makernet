@@ -9,6 +9,7 @@ import { SignupComponent } from './signup/signup.component';
 import { EmailComponent } from './email/email.component';
 import { ProjectComponent } from './project/project.component';
 import { ContributionsComponent } from './contributions/contributions.component';
+import { MakerSpaceReservationComponent } from './maker-space-reservation/maker-space-reservation.component';
 
 
 export const router: Routes = [
@@ -18,6 +19,7 @@ export const router: Routes = [
   { path: 'login-email', component: EmailComponent },
   { path: 'project', component: ProjectComponent },
   { path: 'contributions', component: ContributionsComponent },
+  { path: 'reservation', component: MakerSpaceReservationComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] }
 
 ]

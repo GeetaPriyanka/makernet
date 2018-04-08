@@ -1,10 +1,17 @@
-import { MakerspaceReservable } from './makerspace-reservable';
 
-export class MakerspaceSpace extends MakerspaceReservable {
+export class MakerspaceSpace {
   capacity: Number;
-  
-  constructor() {
-    super();
-    this.capacity = null;
+  space: String;
+  location: String;
+  time: String;
+  date: any;
+
+  constructor(space: string, capacity: Number, location: string, time: string, date: any) {
+    this.capacity = capacity;
+    this.space = space;
+    this.location = location;
+    this.time = time;
+    this.date = date;
+
   }
 }
