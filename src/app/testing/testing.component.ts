@@ -20,13 +20,7 @@ export class TestingComponent implements OnInit {
   constructor(public afAuth: AngularFireAuth, private router: Router, public db: AngularFireDatabase, private ds: DataService) { }
 
   logout() {
-    this.afAuth.auth.signOut().then(
-      (success) => {
-      this.router.navigate(['/login']);
-    }).catch(
-      (err) => {
-      //this.error = err;
-    })
+    this.ds.logout();
   }
 
   
@@ -50,7 +44,7 @@ export class TestingComponent implements OnInit {
     let newUser: MakerspaceUser = new MakerspaceUser();
     newUser.displayName = this.afAuth.auth.currentUser.displayName;
     newUser.email = this.afAuth.auth.currentUser.email;
-    newUser.avatar = this.afAuth.auth.currentUser.photoURL;
+    newUser.imageUrl = this.afAuth.auth.currentUser.photoURL;
     newUser.id = this.afAuth.auth.currentUser.uid;
     this.ds.addUser(newUser);
   }

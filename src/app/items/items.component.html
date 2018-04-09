@@ -2,31 +2,31 @@
 
 <div>
   <app-add-item></app-add-item>
-  <div *ngIf="items?.length > 0;else noItems">
-    <ul *ngFor="let item of items">
-      <li class="collection-item"><div><strong>{{item.title}}:</strong><a href="#" class="secondary-content">
-          <i (click)= "editItem($event, item)" class="fa fa-pencil"></i>
-          <i *ngIf="editState && itemToEdit.id== item.id" (click)= "clearState()" class="fa fa-compress"></i>
-        </a></div><div>{{item.description}}</div><div>{{item.date}}</div> 
-    <div *ngIf = "editState && itemToEdit.id == item.id">
-      <form (ngSubmit)="updateItem(item)">
+  <div *ngIf="events?.length > 0;else noEvents">
+    <ul *ngFor="let event of events">
+      <li class="collection-item"><div><strong>{{event.title}}:</strong><a class="secondary-content">
+          <i (click)= "editItem(event)" class="fa fa-pencil"></i>
+          <i *ngIf="editState && eventToEdit.id== event.id" (click)= "clearState()" class="fa fa-compress"></i>
+        </a></div><div>{{event.description}}</div><div>{{event.date}}</div> 
+    <div *ngIf = "editState && eventToEdit.id == event.id">
+      <form (ngSubmit)="updateItem(event)">
           <div class=row>
               <div class="input-field col s6">
-                <input type="text" placeholder="Add Title"[(ngModel)]="item.title" name="title">
+                <input type="text" placeholder="Add Title"[(ngModel)]="event.title" name="title">
           
               </div>
               <div class="input-field col s6">
-                  <input type="text" placeholder="Add Description"[(ngModel)]="item.description" name="description">
+                  <input type="text" placeholder="Add Description"[(ngModel)]="event.description" name="description">
                   
                 </div>
                 <div class="input-field col s6">
-                  <input type="date"[(ngModel)]="item.date" name="date">
+                  <input type="date"[(ngModel)]="event.date" name="date">
                   
                 </div>
                 <div>
                 <input type="submit" value="Update Event" class="btn blue">
               </div>
-                <button (click)="deleteItem($event, item)"class="btn red">Delete Event</button>
+                <button (click)="deleteItem(event)"class="btn red">Delete Event</button>
             </div>
       </form>
 
@@ -35,7 +35,7 @@
     </ul>
   </div>
 
-  <ng-template #noItems>
+  <ng-template #noEvents>
     <hr>
     <h5> There are no events to list </h5>
   </ng-template>

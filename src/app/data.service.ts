@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireStorage } from 'angularfire2/storage';
@@ -28,16 +29,30 @@ export class DataService {
   private authStateSub: Subscription;
   private uid: string;
 
-  constructor(private afAuth: AngularFireAuth, private db: AngularFireDatabase, private afStorage: AngularFireStorage) { 
+  constructor(private afAuth: AngularFireAuth, private db: AngularFireDatabase, private afStorage: AngularFireStorage, private router: Router) { 
     this.authStateSub = this.afAuth.authState.subscribe(auth => {
-      this.uid = auth.uid;
-      if (this.currentUserSub) {
-        this.currentUserSub.unsubscribe();
+      if (auth) {
+        this.uid = auth.uid;
+        if (this.currentUserSub) {
+          this.currentUserSub.unsubscribe();
+        }
+        this.currentUserSub = this.db.object<MakerspaceUser>('/users/' + this.uid).valueChanges().subscribe(
+          user => {this.currentUser = user}
+        );
       }
-      this.currentUserSub = this.db.object<MakerspaceUser>('/users/' + this.uid).valueChanges().subscribe(
-        user => {this.currentUser = user}
-      );
+      this.uid = null;
+      this.currentUser = null;
     });
+  }
+
+  logout() {
+    this.afAuth.auth.signOut().then(
+      (success) => {
+        this.router.navigate(['/login']);
+      }).catch(
+      (err) => {
+        //this.error = err;
+      })
   }
 
   addUser(user: MakerspaceUser) {
@@ -195,11 +210,11 @@ export class DataService {
   }
 
   private hasEmptyProperty(data: Timestamped) {
-    for (let prop of Object.getOwnPropertyNames(data)) {
+    /* for (let prop of Object.getOwnPropertyNames(data)) {
       if (!data[prop]) {
         return true;
       }
-    }
+    } */
     return false;
   }
 

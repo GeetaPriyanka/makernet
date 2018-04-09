@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ItemService } from '../item.service';
+import { DataService } from '../data.service';
 import { Item } from '../models/Item';
+import { MakerspaceEvent } from '../models/makerspace-event';
 
 @Component({
   selector: 'app-items',
@@ -8,35 +9,35 @@ import { Item } from '../models/Item';
   styleUrls: ['./items.component.css']
 })
 export class ItemsComponent implements OnInit {
-items: Item[];
+events: MakerspaceEvent[];
 editState: boolean= false;
-itemToEdit: Item;
-  constructor(private itemService: ItemService) { }
+eventToEdit: MakerspaceEvent;
+  constructor(private ds: DataService) { }
 
   ngOnInit() {
-    this.itemService.getItems().subscribe(items => {
+    this.ds.listEvents().subscribe(events => {
       //console.log(items);
-      this.items = items;
+      this.events = events;
     });
   }
 
-    deleteItem(event, item: Item){
+    deleteItem(event: MakerspaceEvent){
       this.clearState();
-      this.itemService.deleteItem(item);
+      this.ds.deleteEvent(event.id);
 
     }
-  editItem(event, item: Item) {
+  editItem(event: MakerspaceEvent) {
     this.editState = true;
-    this.itemToEdit = item;
+    this.eventToEdit = event;
 
   }
   clearState() {
     this.editState = false;
-    this.itemToEdit= null;
+    this.eventToEdit= null;
   }
 
-  updateItem(item: Item) {
-    this.itemService.updateItem(item);
+  updateItem(event: MakerspaceEvent) {
+    this.ds.updateEvent(event);
     this.clearState();
   }
 }
