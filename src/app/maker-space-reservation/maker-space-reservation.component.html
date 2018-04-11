@@ -47,26 +47,44 @@
       <div *ngIf="noRooms" class="alert alert-primary" role="alert">
 
         "No rooms availabe at this time. Please select another date/time"
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+      </div>
+      <div *ngIf="chooseCorrectDate" class="alert alert-primary" role="alert">
+        "Please select a future date"
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+      </div>
+      <div *ngIf="chooseCorrectTime" class="alert alert-primary" role="alert">
+        "Please select a future time"
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+      </div>
+      <div *ngIf="confirmed" class="alert alert-primary" role="alert">
+        "Your reservation for the selected time and space has been made"
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
       </div>
 
-      <div *ngIf="availableRooms">
+      <div *ngIf="availableRooms" id="id01">
         <table>
-          <tr *ngFor="let available of availableRooms">
-            <td class="form-group">
-              <div>Space: {{available.space}}</div>
-              <div>Capacity: {{available.capacity}}</div>
-              <div>Location: {{available.location}}</div>
-              <div>Date: {{available.date}}</div>
-              <div>Time: {{available.time}}</div>
-              <div>
-                <button type="button" style="background-color:#008080;" (click)="onSubmitReserve()">Reserve</button>
-              </div>
-
-            </td>
+          <tr *ngFor="let MakerspaceReservation of availableRooms; let in = index">
             <td>
-             
+              <form #f2="ngForm" (ngSubmit)="onSubmitReserve(f2)">
+
+                <div style="display: inline-block">Space: &nbsp;&nbsp;&nbsp;&nbsp; </div><div style="display: inline-block"><input type="text" id="space" name="space-{{in}}" value={{MakerspaceReservation.space}} readonly /></div><br>
+                <div style="display: inline-block">Capacity: </div><div style="display: inline-block"><input type="text" id="capacity" name="capacity-{{in}}" value={{MakerspaceReservation.capacity}} readonly /> </div><br>
+                <div style="display: inline-block">Location:</div><div style="display: inline-block"> <input type="text" id="location" name="location-{{in}}" value={{MakerspaceReservation.location}} readonly /></div><br>
+                <div style="display: inline-block">Date: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div><div style="display: inline-block"> <input type="text" id="date" name="date-{{in}}" value={{MakerspaceReservation.date}} readonly /></div><br>
+                <div style="display: inline-block">Time: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div><div style="display: inline-block"><input type="text" id="time" name="time-{{in}}" value={{MakerspaceReservation.time}} readonly /></div><br>
+                <div style="display: inline-block">Duration: </div><div style="display: inline-block"><input type="text" id="duration" name="duration-{{in}}" value="1 hour" readonly /></div>
+
+                <div>
+                  <button type="submit" class="btn-default" style="background-color:#008080;" onclick="document.getElementById('id01').style.display='none';" (click)="onSubmitReserve">Reserve</button>
+                </div>
+              </form>
             </td>
+            <td></td>
 
           </tr>
         </table>
@@ -74,7 +92,7 @@
 
     </div>
 
-    
 
-  </div>
+
+    </div>
   </div>

@@ -10,7 +10,9 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarComponent } from "ap-angular2-fullcalendar/src/calendar/calendar";
-import { NgSrcModule } from 'ng-src';
+//import { NgSrcModule } from 'ng-src';
+import { SweetAlertService } from 'ng2-sweetalert2';
+
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -26,7 +28,6 @@ import { ContributionsComponent } from './contributions/contributions.component'
 import { MakerSpaceReservationComponent } from './maker-space-reservation/maker-space-reservation.component';
 import { GalleryComponent } from  './gallery/gallery.component';
 import { TestingComponent } from './testing/testing.component';
-
 
 //Items
 import { ItemsComponent } from './items/items.component';
@@ -55,7 +56,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 
   imports: [
     BrowserModule,
-    NgSrcModule,
+   // NgSrcModule,
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
@@ -68,9 +69,11 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     NgbModule.forRoot(),
     routes
   ],
+
   providers: [
     AuthGuard,
     DataService,
+    SweetAlertService,
     ItemService],
   bootstrap: [AppComponent]
 })

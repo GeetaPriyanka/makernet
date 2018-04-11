@@ -11,3 +11,8 @@
   transition: all 0.5s ease;
   margin-top: 0px;
 }
+
+
+.alert {
+  float: left;
+}

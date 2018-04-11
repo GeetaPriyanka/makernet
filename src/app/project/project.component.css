@@ -9,7 +9,7 @@
 
 #sidebar-wrapper {
   z-index: 1000;
-  position: fixed;
+  position: absolute;
   left: 250px;
   width: 250px;
   height: 100%;
@@ -25,13 +25,13 @@
   color: #000000;
   text-indent: 20px;
   background-color: #cccccc;
+  top: 80px;
 }
 
 
 #page-content-wrapper {
-  width: 100%;
   position: absolute;
-  padding: 15px;
+  left: 500px;
 }
 
 
@@ -57,7 +57,7 @@
 /* The Modal (background) */
 .modal {
   display: block; /* Hidden by default */
-  position: fixed; /* Stay in place */
+  position: absolute; /* Stay in place */
   z-index: 1; /* Sit on top */
   padding-top: 100px; /* Location of the box */
   left: 0;

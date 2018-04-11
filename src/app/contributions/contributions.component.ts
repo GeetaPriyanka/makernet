@@ -4,6 +4,9 @@ import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MakerspaceProject } from '../models/makerspace-project';
 import { AngularFireStorage } from 'angularfire2/storage';
+import { NgForm } from '@angular/forms';
+import {swal} from 'ng2-sweetalert2';
+import "ng2-sweetalert2";
 
 @Component({
   selector: 'app-contributions',
@@ -14,7 +17,11 @@ export class ContributionsComponent implements OnInit {
 
   public firebase;
   projectData: any;
+  uploaded: any;
   projectDataSubscription: Subscription;
+  project: MakerspaceProject = new MakerspaceProject();
+  submitEnabled: boolean = true;
+  selectedValue: MakerspaceProject = new MakerspaceProject();
 
   constructor(private angularFire: AngularFireDatabase, private afStorage: AngularFireStorage, private ds: DataService) {
 
@@ -28,7 +35,32 @@ export class ContributionsComponent implements OnInit {
       });
   }
 
+  onProjectChange() {
+    console.log('Project Changed: ' + this.selectedValue.title);
 
+
+  }
+  onSubmit(f: NgForm) {
+    console.log(this.selectedValue);
+    f.reset();
+    if (this.upload) {
+      this.uploaded = true;
+    }
+  }
+  upload(event) {
+
+    this.toggleSubmitEnabled();
+    console.log('id ' + this.selectedValue.id);
+
+    let upload = this.ds.addImageToGallery(event.target.files[0], this.ds.getCurrentUser().id, this.selectedValue.id);
+    console.log(this.upload);
+    
+  }
+  
+
+  toggleSubmitEnabled() {
+    this.submitEnabled = !this.submitEnabled;
+  }
  
 }
 

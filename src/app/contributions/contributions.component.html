@@ -2,12 +2,12 @@
 <div id="wrapper">
 
   <div id="page-content-wrapper">
-    <form>
-      <div style="padding-bottom:15px;" class="col-xs-12 col-lg-6">
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+      <div style="padding-bottom:15px;" class="col-xs-10 col-lg-4">
         <span>Project</span>
-        <select placeholder="Select project" class="form-control" [(ngModel)]="project">
+        <select name="project" #project="ngModel" placeholder="Select project" class="form-control" [(ngModel)]="selectedValue" (change)="onProjectChange()">
 
-          <option *ngFor="let project of projectData" [ngValue]="project">{{project.title}}</option>
+          <option *ngFor="let project of projectData" id="project" [ngValue]="project">{{project.title}}</option>
         </select>
         <br />
         <div>
@@ -16,10 +16,17 @@
         </div>
 
         <div>
-          <button class="btn btn-success"  (click)="onSubmit">Submit</button>
+          <button class="btn btn-success" (click)="onSubmit">Submit</button>
         </div>
 
       </div>
-</form>
+    </form>
+    <div *ngIf="uploaded" class="alert alert-primary" role="alert">
+      "Your Contribution was uploaded"
+
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+    </div>
   </div>
-  </div>
+  
+</div>

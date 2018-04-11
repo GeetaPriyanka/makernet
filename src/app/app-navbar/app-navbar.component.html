@@ -18,66 +18,72 @@
           <a routerLink="/gallery1" class="nav-link" id="gallery1">Gallery</a>
         </li>
         <li class="nav-item">
-          <a routerLink="/project" class="nav-link" id="gallery1">Projects</a>
+          <a routerLink="/project" class="nav-link" id="projects">Projects</a>
         </li>
         <li class="nav-item">
-          <a routerLink="/team" class="nav-link" id="gallery1">Team</a>
+          <a routerLink="/contributions" class="nav-link" id="contributions">ContributeToProject </a>
         </li>
         <li class="nav-item">
-          <a routerLink="/items" class="nav-link" id="gallery1">Items</a>
+          <a routerLink="/reservation" class="nav-link" id="reserve">Reserve Space</a>
+        </li>
+        <!--   <li class="nav-item">
+            <a routerLink="/team" class="nav-link" id="gallery1">Team</a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/items" class="nav-link" id="gallery1">Items</a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/Contact" class="nav-link" id="gallery1">Contact</a>
+          </li> -->
+          <li class="nav-item">
+            <a class="nav-link" (click)="logout()">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div [style.padding-top]="spacerHeight"></div>
+
+  <!-- <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a routerLink="/dashboard" class="nav-link">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a routerLink="/Contact" class="nav-link" id="gallery1">Contact</a>
+          <a routerLink="/project" class="nav-link" id="projects">Projects</a>
+
         </li>
         <li class="nav-item">
-          <a class="nav-link" (click)="logout()">Logout</a>
+          <a routerLink="/contributions" class="nav-link" id="contributions">ContributeToProject </a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/reservation" class="nav-link" id="reserve">Reserve Space</a>
+        </li>
+
+        <li class="nav-item">
+          <a routerLink="/items" class="nav-link" id="items">Items </a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/gallery1" class="nav-link" id="gallery1">gallery1 </a>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Gallery</a>
+          <div class="dropdown-menu" aria-labelledby="dropdown01">
+            <a class="dropdown-item" href="#">Project Images</a>
+            <a class="dropdown-item" href="#">Equipment Images</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <div class="toprightcorner">
+            <button (click)="logout()" style="color:darkgrey">Logout</button>
+          </div>
         </li>
       </ul>
     </div>
-  </div>
-</nav>
 
-<div [style.padding-top]="spacerHeight"></div>
-
-<!-- <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-
-  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a routerLink="/dashboard" class="nav-link">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a routerLink="/project" class="nav-link" id="projects">Projects</a>
-
-      </li>
-      <li class="nav-item">
-        <a routerLink="/contributions" class="nav-link" id="contributions">ContributeToProject </a>
-      </li>
-      <li class="nav-item">
-        <a routerLink="/reservation" class="nav-link" id="reserve">Reserve Space</a>
-      </li>
-
-      <li class="nav-item">
-        <a routerLink="/items" class="nav-link" id="items">Items </a>
-      </li>
-      <li class="nav-item">
-        <a routerLink="/gallery1" class="nav-link" id="gallery1">gallery1 </a>
-      </li>
-
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Gallery</a>
-        <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" href="#">Project Images</a>
-          <a class="dropdown-item" href="#">Equipment Images</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <div class="toprightcorner">
-          <button (click)="logout()" style="color:darkgrey">Logout</button>
-        </div>
-      </li>
-    </ul>
-  </div>
-
-</nav>
- -->
+  </nav>
+   -->

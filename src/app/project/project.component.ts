@@ -6,6 +6,7 @@ import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { DataService } from '../data.service';
 import { Router } from '@angular/router';
+import { MakerspaceGallery } from '../models/makerspace-gallery';
 
 
 @Component({
@@ -19,17 +20,19 @@ export class ProjectComponent implements OnInit {
   public firebase;
   public URL;
   public projects: MakerspaceProject[];
-  selected: any[];
   toUpdate: any;
   contribute: any;
   submitEnabled: boolean = true;
   projectData: any;
   projectDataSubscription: Subscription;
   item: any[];
-
+  gallery: any;
+  galleryData: Subscription;
+  addSuccess: any;
 
   project: MakerspaceProject = new MakerspaceProject();
   update: MakerspaceProject = new MakerspaceProject();
+  selected: MakerspaceProject;
 
   constructor(private angularFire: AngularFireDatabase, private afStorage: AngularFireStorage, private ds: DataService, private router: Router) {
 
@@ -45,7 +48,10 @@ export class ProjectComponent implements OnInit {
         console.log(this.projectData);
       });
 
-
+    this.galleryData = this.angularFire.list('/galleries').valueChanges().subscribe(
+      gallery => {
+        this.gallery = gallery;
+      });
   }
 
 
@@ -63,6 +69,7 @@ export class ProjectComponent implements OnInit {
      }*/
      this.ds.addProject(this.project);
      this.project = new MakerspaceProject();
+     this.addSuccess = true;
   }
 
  
@@ -79,9 +86,16 @@ export class ProjectComponent implements OnInit {
     this.submitEnabled = !this.submitEnabled;
   }
   showProject(project) {
+    this.selected = new MakerspaceProject();
     this.selected = project;
-    console.log(this.selected);
+    console.log(this.selected.id);
+    console.log(this.ds.getCurrentUser().id);
 
+    this.galleryData = this.angularFire.list('/galleries' + this.ds.getCurrentUser().id + '/' + this.selected.id).valueChanges().subscribe(
+      gallery => gallery.forEach(item => {
+        this.gallery = item;
+        console.log(this.gallery);
+      }));
   }
 
   updateProject(project) {

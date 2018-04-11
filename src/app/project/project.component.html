@@ -83,12 +83,12 @@
 
  
 
-  <div id="page-content-wrapper" >
+  <div id="page-content-wrapper">
 
-    <div class="main main--projects">
+    <div class="main main--projects" id="id01">
 
-      <section style="padding-bottom:100px;">
-        <div style="margin-top:120px" class="form-container">
+      <section>
+        <div class="form-container">
 
           <h5 class="modal-title" id="exampleModalLabel">Add Project</h5>
 
@@ -115,7 +115,7 @@
             </div>
 
             <div>
-              <button class="btn btn-success" [disabled]="!submitEnabled" (click)="onSubmit">Submit</button>
+              <button class="btn btn-success" [disabled]="!submitEnabled" (click)="onSubmit" onclick="document.getElementById('id01').style.display='none';">Submit</button>
             </div>
 
           </form>
@@ -123,8 +123,13 @@
 
         </div>
       </section>
-      <div style="height:250px;"></div>
+    </div>
+    <div *ngIf="addSuccess" class="alert alert-primary" role="alert" style="top: 75px;">
+
+      "Project has been added successfully"
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
     </div>
   </div>
-</div>
+  </div>
 
