@@ -135,7 +135,7 @@ export class MakerSpaceReservationComponent implements OnInit {
     console.log(new Date().toJSON().substring(11, 16));
 
     this.currentDate = new Date().toJSON().substring(0, 10);
-    this.currentTime = new Date().toLocaleTimeString().substring(0, 4));
+    this.currentTime = new Date().toLocaleTimeString().substring(0, 4);
 
     if (this.currentDate > this.searchForReservation.date) {
       this.chooseCorrectDate = true;
