@@ -91,11 +91,12 @@ export class ProjectComponent implements OnInit {
     console.log(this.selected.id);
     console.log(this.ds.getCurrentUser().id);
 
-    this.galleryData = this.angularFire.list('/galleries' + this.ds.getCurrentUser().id + '/' + this.selected.id).valueChanges().subscribe(
+    this.galleryData = this.angularFire.list('/galleries/' + this.ds.getCurrentUser().id + '/' + this.selected.id).valueChanges().subscribe(
       gallery => gallery.forEach(item => {
         this.gallery = item;
         console.log(this.gallery);
       }));
+    
   }
 
   updateProject(project) {

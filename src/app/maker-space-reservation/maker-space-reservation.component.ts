@@ -62,7 +62,7 @@ export class MakerSpaceReservationComponent implements OnInit {
       });
   }
 
-  asyncAwait(f: NgForm) {
+ async asyncAwait(f: NgForm) {
     console.log(this.searchForReservation);
     var a = this;
     
@@ -81,6 +81,7 @@ export class MakerSpaceReservationComponent implements OnInit {
             a.countSpace1 += 1;
             console.log(a.count);
             console.log(a.countSpace1);
+            resolve(true);
 
           }
 
@@ -120,7 +121,6 @@ export class MakerSpaceReservationComponent implements OnInit {
 
     
               
-    resolve(true);
 
      });
 
