@@ -155,17 +155,21 @@ export class DataService {
     this.update('/galleries', this.prepareUpdate(gallery));
   }
 
-  addImageToGallery(image: File, userId: string, projectId:string) {
+  addImageToGallery(image: File, galleryId:string) {
     let newImage = new MakerspaceImage();
     this.uploadImage(image, (result) => {
       newImage.imageUrl = result.url;
     }).then(() => {
-      this.db.list('/galleries/' + userId +'/'+projectId).push(this.timestamp(newImage));
+      this.db.list('/galleries/' + galleryId).push(this.timestamp(newImage));
     });
   }
 
-  getGallery(userId: string, projectId: string): Observable<MakerspaceGallery> {
-    return this.db.object<MakerspaceGallery>('/galleries' + userId + '/' + projectId).valueChanges();
+  getGallery(galleryId: string): Observable<MakerspaceGallery> {
+    return this.db.object<MakerspaceGallery>('/galleries/' + galleryId).valueChanges();
+  }
+
+  getGalleriesByUser(userId: string): Observable<MakerspaceGallery[]> {
+    return this.db.list<MakerspaceGallery>('/galleries', ref => ref.orderByChild('owner').equalTo(userId)).valueChanges();
   }
 
   uploadImage(image: File, callback: Function) {

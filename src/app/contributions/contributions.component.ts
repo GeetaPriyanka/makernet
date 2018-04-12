@@ -52,7 +52,7 @@ export class ContributionsComponent implements OnInit {
     this.toggleSubmitEnabled();
     console.log('id ' + this.selectedValue.id);
 
-    let upload = this.ds.addImageToGallery(event.target.files[0], this.ds.getCurrentUser().id, this.selectedValue.id);
+    let upload = this.ds.addImageToGallery(event.target.files[0], this.selectedValue.id);
     console.log(this.upload);
     
   }
