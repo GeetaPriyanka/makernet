@@ -35,9 +35,11 @@ export class SignupComponent implements OnInit {
         (success) => {
           
           this.userSub = this.ds.getCurrentUser().subscribe(user => {
-            console.log(user.uid);
             //add user to firebase below:
-            
+            this.newUser = new MakerspaceUser();
+            this.newUser.displayName = this.displayName;
+            this.newUser.email = this.email;
+            this.ds.addUser(this.newUser);
           });
       }).then(success => {
         this.router.navigate(['/dashboard']);
