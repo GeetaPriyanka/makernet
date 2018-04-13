@@ -2,6 +2,11 @@ import { Component } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import * as firebase from 'firebase';
 import { AngularFireObject } from 'angularfire2/database';
+import { Observable } from '@firebase/util';
+import { MakerspaceGallery } from '../models/makerspace-gallery';
+import { DataService } from '../data.service';
+import { Subscription } from 'rxjs';
+import { MakerspaceUser } from '../models/makerspace-user';
 
 
 interface featuredPhotosUrls {
@@ -20,16 +25,34 @@ interface Photo{
 })
 export class GalleryComponent {
   
+  gallerySubscription: Subscription;
+  userGalleries: Array<MakerspaceGallery>;
+
   featuredPhotoStream: any
   //photoListStream:any
   photoListStream: AngularFireList<any>
   //featuredPhotoStream: AngularFireObject<featuredPhotosUrls>; 
   // //In the latest version FirebaseObjectObservable and FirebaseListObservable are removed and instead we use : AngularFireObject & AngularFireList
 
+  userSub: Subscription;
+  currentUser: firebase.User;
 
-  constructor(private db: AngularFireDatabase){
+  constructor(private db: AngularFireDatabase, private ds: DataService){
     this.featuredPhotoStream = this.db.object('/photos/featured').valueChanges();
     this.photoListStream = this.db.list('/photos/list');
+
+    this.userSub = this.ds.getCurrentUser().subscribe(user => {
+      this.currentUser = user;
+    });
+
+    this.gallerySubscription = this.ds.getGalleriesByUser(this.currentUser.uid).subscribe(
+      galleries => {
+        this.userGalleries = galleries;
+    });
+  }
+
+  logGalleries() {
+    console.log(this.userGalleries);
   }
   
 

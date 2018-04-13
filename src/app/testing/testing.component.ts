@@ -51,7 +51,7 @@ export class TestingComponent implements OnInit {
 
   addEvent() {
     let newEvent: MakerspaceEvent = new MakerspaceEvent();
-    newEvent.owner = this.ds.getCurrentUser().id;
+    //newEvent.owner = this.ds.getCurrentUser().id;
     newEvent.location = "HQ";
     newEvent.start = "Monday";
     newEvent.end = "Tuesday";
@@ -65,7 +65,7 @@ export class TestingComponent implements OnInit {
 
   user: MakerspaceUser;
   getCurrentUser() {
-    this.user = this.ds.getCurrentUser();
+    //this.user = this.ds.getCurrentUser();
   }
   updateUser() {
     this.user.bio = "Test updating user bio";

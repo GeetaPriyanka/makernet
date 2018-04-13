@@ -7,6 +7,8 @@ import { Subscription } from 'rxjs/Subscription';
 import { DataService } from '../data.service';
 import { Router } from '@angular/router';
 import { MakerspaceGallery } from '../models/makerspace-gallery';
+import { MakerspaceUser } from '../models/makerspace-user';
+import { User } from '@firebase/auth-types';
 
 
 @Component({
@@ -34,6 +36,9 @@ export class ProjectComponent implements OnInit {
   update: MakerspaceProject = new MakerspaceProject();
   selected: MakerspaceProject;
 
+  userSub: Subscription;
+  currentUser: firebase.User;
+
   constructor(private angularFire: AngularFireDatabase, private afStorage: AngularFireStorage, private ds: DataService, private router: Router) {
 
     this.firebase = this.angularFire.list('/projects');
@@ -52,6 +57,10 @@ export class ProjectComponent implements OnInit {
       gallery => {
         this.gallery = gallery;
       });
+
+    this.userSub = this.ds.getCurrentUser().subscribe(user => {
+      this.currentUser = user;
+    });
   }
 
 
@@ -89,9 +98,9 @@ export class ProjectComponent implements OnInit {
     this.selected = new MakerspaceProject();
     this.selected = project;
     console.log(this.selected.id);
-    console.log(this.ds.getCurrentUser().id);
+    console.log(this.currentUser.uid);
 
-    this.galleryData = this.angularFire.list('/galleries' + this.ds.getCurrentUser().id + '/' + this.selected.id).valueChanges().subscribe(
+    this.galleryData = this.angularFire.list('/galleries' + this.currentUser.uid + '/' + this.selected.id).valueChanges().subscribe(
       gallery => gallery.forEach(item => {
         this.gallery = item;
         console.log(this.gallery);

@@ -63,8 +63,10 @@ export class DataService {
     this.update('/users', this.prepareUpdate(user));
   }
 
-  getCurrentUser() {
-    return this.currentUser;
+  getCurrentUser(): Observable<firebase.User> {
+    return this.afAuth.authState;
+    //return this.db.object<MakerspaceUser>('/users/' + this.uid).valueChanges();
+    //return this.currentUser;
   }
 
   addEvent(msEvent: MakerspaceEvent) {
@@ -147,8 +149,21 @@ export class DataService {
     return this.getDbList<MakerspaceProject>('/projects');
   }
 
-  addGallery(gallery: MakerspaceGallery) {
-    this.update('/galleries', this.prepareUpdate(gallery));
+  addGallery(gallery: MakerspaceGallery, images: File[]) {
+    let uploadCount = 0;
+    for (let image of images) {
+      let task = this.uploadImage(image, result =>
+      {
+        let newImage = new MakerspaceImage();
+        newImage.imageUrl = result.url;
+        this.timestamp(newImage);
+        gallery.images.push(newImage);
+        uploadCount++;
+        if (uploadCount == images.length) {
+          this.update('/galleries', this.prepareUpdate(gallery));
+        }
+      });
+    }
   }
 
   updateGallery(gallery: MakerspaceGallery) {
@@ -189,7 +204,7 @@ export class DataService {
     return task;
   }
 
-  private timestamp(data: Timestamped) {
+  timestamp(data: Timestamped) {
     data.updated_at = firebase.database.ServerValue.TIMESTAMP;
 
     if (!data.hasOwnProperty('created_at') || !data.created_at) {
@@ -223,6 +238,8 @@ export class DataService {
   }
 
   private update(location: string, update: Object) {
+    console.log('update:');
+    console.log(update);
     if (update) this.db.object(location).update(update);
   }
 

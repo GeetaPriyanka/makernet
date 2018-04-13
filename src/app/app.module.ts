@@ -35,6 +35,7 @@ import { ItemService } from './item.service';
 import { AddItemComponent } from './add-item/add-item.component';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { GalleryAddComponent } from './gallery-add/gallery-add.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     ItemsComponent,
     AddItemComponent,
     GalleryComponent,
-    TestingComponent
+    TestingComponent,
+    GalleryAddComponent
   ],
   
 
