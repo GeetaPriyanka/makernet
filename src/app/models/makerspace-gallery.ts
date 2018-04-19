@@ -3,13 +3,15 @@ import { Timestamped } from "./timestamped";
 
 export class MakerspaceGallery extends Timestamped {
   images: Array<MakerspaceImage>;
-  thumbnail: MakerspaceImage;
+  thumbnailUrl: string;
+  name: string;
 
 
   constructor() {
     super();
     this.images = new Array<MakerspaceImage>();
-    this.thumbnail = null;
+    this.thumbnailUrl = null;
+    this.name = '';
   }
 
 }

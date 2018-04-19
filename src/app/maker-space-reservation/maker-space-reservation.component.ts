@@ -9,6 +9,7 @@ import { MakerspaceSpace } from '../models/makerspace-space';
 import { DataService } from '../data.service';
 
 import { MakerspaceReservation } from '../models/makerspace-reservation';
+import { MakerspaceUser } from '../models/makerspace-user';
 
 
 @Component({
@@ -49,6 +50,9 @@ export class MakerSpaceReservationComponent implements OnInit {
   searchForReservation: searchForReservation = new searchForReservation();
   MakerspaceReservation: MakerspaceReservation ;
 
+  userSub: Subscription;
+  currentUser: firebase.User;
+
   constructor(private angularFire: AngularFireDatabase, private afStorage: AngularFireStorage, private ds: DataService) {
 
     this.firebase = this.angularFire.list('/Spaces');
@@ -60,6 +64,10 @@ export class MakerSpaceReservationComponent implements OnInit {
       space1 => {
         this.space1 = space1;
       });
+
+    this.userSub = this.ds.getCurrentUser().subscribe(user => {
+      this.currentUser = user;
+    });
   }
 
   async asyncAwait1(f: NgForm) {
@@ -247,7 +255,7 @@ export class MakerSpaceReservationComponent implements OnInit {
     this.reservedDuration = document.getElementById("duration");
     this.reservedDate = document.getElementById("date");
     this.reservedTime = document.getElementById("time");
-    this.MakerspaceReservation = new MakerspaceReservation(this.reservedSpace.value, this.reservedLocation.value, this.reservedCapacity.value, this.reservedDate.value, this.reservedTime.value, this.reservedDuration.value, this.ds.getCurrentUser().id);
+    this.MakerspaceReservation = new MakerspaceReservation(this.reservedSpace.value, this.reservedLocation.value, this.reservedCapacity.value, this.reservedDate.value, this.reservedTime.value, this.reservedDuration.value, this.currentUser.uid);
     console.log(this.MakerspaceReservation);
 
     this.firebase = this.angularFire.list('/Reservation/' + this.reservedSpace.value);
