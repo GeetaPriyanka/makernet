@@ -31,6 +31,7 @@ export class ProjectComponent implements OnInit {
   galleryData: Subscription;
   addSuccess: any;
   addImage: Array<string>;
+  i: any;
   add: Array<MakerspaceImage> = new Array<MakerspaceImage>();
 
   project: MakerspaceProject = new MakerspaceProject();
@@ -92,16 +93,21 @@ export class ProjectComponent implements OnInit {
     this.selected = new MakerspaceProject();
     this.selected = project;
     console.log(this.selected.id);
+    this.addImage = new Array<string>();
 
     this.galleryData = this.angularFire.list('/projectImages/' + this.selected.id).valueChanges().subscribe(
       gallery => gallery.forEach(item => {
         this.gallery = item;
         console.log(this.gallery.imageUrl);
         var c = this.gallery.imageUrl;
-        this.addImage = new Array<string>();
         this.addImage.push(c);
 
       }));
+
+    for (this.i = 0; this.i < this.addImage.length; this.i++) {
+      //Do your stuff here
+      console.log(this.addImage[this.i]);
+    }
   
    /* this.ds.getProjectImages(this.selected.id).subscribe(
       gallery => (item => {
@@ -112,8 +118,7 @@ export class ProjectComponent implements OnInit {
 
       
       }));
-
-    console.log(this.addImage);*/
+*/
 
   }
 

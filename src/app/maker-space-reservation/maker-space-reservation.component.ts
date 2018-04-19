@@ -48,6 +48,8 @@ export class MakerSpaceReservationComponent implements OnInit {
   chooseCorrectDate: any;
   chooseCorrectTime: any;
   searchForReservation: searchForReservation = new searchForReservation();
+  reserve: MakerspaceReservable = new MakerspaceReservable();
+
   MakerspaceReservation: MakerspaceReservation ;
 
   userSub: Subscription;
@@ -70,16 +72,18 @@ export class MakerSpaceReservationComponent implements OnInit {
     });
   }
 
-  async asyncAwait1(f: NgForm) {
+  async asyncAwait(f: NgForm) {
     console.log(this.searchForReservation);
     var a = this;
 
 
-    return new Promise(function (resolve, reject) {
+   return new Promise(function (resolve, reject) {
 
       console.log(a.searchForReservation);
       a.firebase = a.angularFire.list('/Reservation');
       a.time = a.searchForReservation.hour + ":" + a.searchForReservation.min + " PM";
+
+
 
       a.SpaceSubscription = a.angularFire.list('/Reservation/Space1/').valueChanges().subscribe(
         space1 => space1.forEach(item => {
@@ -89,25 +93,14 @@ export class MakerSpaceReservationComponent implements OnInit {
             a.countSpace1 += 1;
             console.log(a.count);
             console.log(a.countSpace1);
-            resolve(true);
+
           }
 
         }));
 
 
-    });
-  }
-
-  async asyncAwait2(f: NgForm) {
-    console.log(this.searchForReservation);
-    var a = this;
 
 
-    return new Promise(function (resolve, reject) {
-
-      console.log(a.searchForReservation);
-      a.firebase = a.angularFire.list('/Reservation');
-      a.time = a.searchForReservation.hour + ":" + a.searchForReservation.min + " PM";
 
       a.SpaceSubscription = a.angularFire.list('/Reservation/Space2/').valueChanges().subscribe(
         space2 => space2.forEach(item => {
@@ -115,26 +108,11 @@ export class MakerSpaceReservationComponent implements OnInit {
           if (a.searchForReservation.date == a.space2.date && a.time == a.space2.time) {
             a.count += 1;
             a.countSpace2 += 1;
-            resolve(true);
-
           }
 
         }));
-      resolve(false);
-
-    });
-  }
-
-  async asyncAwait3(f: NgForm) {
-    console.log(this.searchForReservation);
-    var a = this;
 
 
-    return new Promise(function (resolve, reject) {
-
-      console.log(a.searchForReservation);
-      a.firebase = a.angularFire.list('/Reservation');
-      a.time = a.searchForReservation.hour + ":" + a.searchForReservation.min + " PM";
 
 
       a.SpaceSubscription = a.angularFire.list('/Reservation/Space3/').valueChanges().subscribe(
@@ -143,40 +121,24 @@ export class MakerSpaceReservationComponent implements OnInit {
           if (a.searchForReservation.date == a.space3.date && a.time == a.space3.time) {
             a.count += 1;
             a.countSpace3 += 1;
-            resolve(true);
 
           }
 
         }));
-      resolve(false);
-    });
-  }
+    
 
-  async asyncAwait4(f: NgForm) {
-    console.log(this.searchForReservation);
-    var a = this;
-
-
-    return new Promise(function (resolve, reject) {
-
-      console.log(a.searchForReservation);
-      a.firebase = a.angularFire.list('/Reservation');
-      a.time = a.searchForReservation.hour + ":" + a.searchForReservation.min + " PM";
-
-
+  
       a.SpaceSubscription = a.angularFire.list('/Reservation/Space4/').valueChanges().subscribe(
         space4 => space4.forEach(item => {
           a.space4 = item;
           if (a.searchForReservation.date == a.space4.date && a.time == a.space4.time) {
             a.count += 1;
             a.countSpace4 += 1;
-            resolve(true);
-
           }
+          resolve(true);
+
         }));
 
-      resolve(false);
-    
 
      });
 
@@ -187,11 +149,12 @@ export class MakerSpaceReservationComponent implements OnInit {
   async onSubmit(f: NgForm) {
     console.log("print me");
     console.log(this.searchForReservation);
-    console.log(new Date().toLocaleTimeString().substring(0,4));
-    console.log(new Date().toJSON().substring(11, 16));
 
     this.currentDate = new Date().toJSON().substring(0, 10);
     this.currentTime = new Date().toLocaleTimeString().substring(0, 4);
+
+    console.log(this.currentDate);
+    console.log(this.currentTime);
 
     if (this.currentDate > this.searchForReservation.date) {
       this.chooseCorrectDate = true;
@@ -200,58 +163,68 @@ export class MakerSpaceReservationComponent implements OnInit {
     else if (this.currentDate == this.searchForReservation.date) {
       if (this.currentTime > (this.searchForReservation.hour + ":" + this.searchForReservation.min))
         this.chooseCorrectTime = true;
-      console.log(this.chooseCorrectTime);
-
+      else
+        this.run(f);
     }
     else {
-      let value1 = await this.asyncAwait1(f);
-      let value2 = await this.asyncAwait2(f);
-      let value3 = await this.asyncAwait3(f);
-      let value4 = await this.asyncAwait4(f);
-
-    
-      if (value1) { console.log("no room in space1"); }
-        else
-          this.availableList.push(new MakerspaceSpace("Space1", 4, "Woodward 334", this.time, this.searchForReservation.date));
-      
-     if (value2) { console.log("no room in space2"); }
-        else
-          this.availableList.push(new MakerspaceSpace("Space2", 5, "Woodward 334", this.time, this.searchForReservation.date));
-      
-     if (value3) {
-      console.log("no room in space3");
-     }
-     else
-          this.availableList.push(new MakerspaceSpace("Space3", 2, "Woodward 334", this.time, this.searchForReservation.date));
-      
-     if (value4) {
-       console.log("no room in space4");
-     }
-      else
-          this.availableList.push(new MakerspaceSpace("Space4", 3, "Woodward 334", this.time, this.searchForReservation.date));
-      
-      console.log(this.count);
-      if (this.count == 4) {
-        this.noRooms = "no rooms are available at this time";
-      }
-      else {
-
-        this.availableList = this.availableList.filter((elem, index, self) => self.findIndex(
-          (t) => { return (t.space === elem.space && t.location === elem.location && t.capacity === elem.capacity && t.time === elem.time && t.date === elem.date) }) === index)
-        this.availableRooms = this.availableList;
-
-
-        console.log(this.availableList);
-      
-    }
+      this.run(f);
     }
   }
+  async run(f: NgForm) {
+      await this.asyncAwait(f);
+        if (this.countSpace1 == 1) { console.log("no room in space1"); }
+        else
+          this.availableList.push(new MakerspaceSpace("Space1", 4, "Woodward 334", this.time, this.searchForReservation.date));
+
+        if (this.countSpace2 == 1) { console.log("no room in space2"); }
+
+        else
+          this.availableList.push(new MakerspaceSpace("Space2", 5, "Woodward 334", this.time, this.searchForReservation.date));
+
+        if (this.countSpace3 == 1) {
+          console.log("no room in space3");
+        }
+        else
+          this.availableList.push(new MakerspaceSpace("Space3", 2, "Woodward 334", this.time, this.searchForReservation.date));
+
+
+        if (this.countSpace4 == 1) {
+          console.log("no room in space4");
+        }
+        else
+          this.availableList.push(new MakerspaceSpace("Space4", 3, "Woodward 334", this.time, this.searchForReservation.date));
+
+
+
+        console.log(this.count);
+        if (this.count == 4) {
+          this.noRooms = "no rooms are available at this time";
+        }
+        else {
+
+          this.availableList = this.availableList.filter((elem, index, self) => self.findIndex(
+            (t) => { return (t.space === elem.space && t.location === elem.location && t.capacity === elem.capacity && t.time === elem.time && t.date === elem.date) }) === index)
+          this.availableRooms = this.availableList;
+
+
+          console.log(this.availableList);
+
+        }
+      }
+
+
+  
 
   onSubmitReserve(f2: NgForm) {
+    console.log(this.reserve);
     this.reservedSpace = document.getElementById("space");
-    console.log(this.reservedSpace);
+
     this.reservedLocation = document.getElementById("location");
+    console.log(this.reservedLocation);
+
     this.reservedCapacity = document.getElementById("capacity");
+    console.log(this.reservedCapacity.value);
+
     this.reservedDuration = document.getElementById("duration");
     this.reservedDate = document.getElementById("date");
     this.reservedTime = document.getElementById("time");

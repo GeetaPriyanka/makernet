@@ -1,20 +1,20 @@
 import { Viewable } from "./viewable";
 
-export abstract class MakerspaceReservable extends Viewable {
-  name: string;
-  roomNumber: string;
-  building: string;
-  campus: string;
-  address: string;
-  description: string;
+export class MakerspaceReservable extends Viewable {
+  space: string;
+  location: string;
+  capacity: string;
+  date: string;
+  time: string;
+  duration: string;
 
   constructor() {
     super();
-    this.name = null;
-    this.roomNumber = null;
-    this.building = null;
-    this.campus = null;
-    this.address = null;
-    this.description = null;
+    this.space = null;
+    this.capacity = null;
+    this.date = null;
+    this.time = null;
+    this.location = null;
+    this.duration = null;
   }
 }

@@ -27,6 +27,9 @@
   background-color: #cccccc;
   top: 80px;
 }
+img {
+  display: block;
+}
 
 
 #page-content-wrapper {

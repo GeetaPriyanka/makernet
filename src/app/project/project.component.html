@@ -41,12 +41,11 @@
           </p>
 
           <h4>Images:</h4>
-          <ul>
-            <li *ngFor="let image of addImage">
+            <div *ngFor="let image of addImage">
 
-              <img src="{{image}}" class="img-responsive"  width="191" height="146"  />
-            </li>
-          </ul>
+              <img src="{{image}}" class="img-responsive"  width="191" height="146"  /> <br />
+
+            </div>
      
           <!--  <img src="{{selected.imageUrl}}" class="img-responsive"> -->
           <br />
