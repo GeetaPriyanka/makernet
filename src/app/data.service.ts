@@ -164,6 +164,15 @@ export class DataService {
     });
   }
 
+  addImageToProject(image: File, projectId: string) {
+    let newImage = new MakerspaceImage();
+    this.uploadImage(image, (result) => {
+      newImage.imageUrl = result.url;
+    }).then(() => {
+      this.db.list('/projectImages/' + projectId).push(this.timestamp(newImage));
+    });
+  }
+
   getGallery(galleryId: string): Observable<MakerspaceGallery> {
     return this.db.object<MakerspaceGallery>('/galleries/' + galleryId).valueChanges();
   }

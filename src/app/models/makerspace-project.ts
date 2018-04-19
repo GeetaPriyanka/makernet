@@ -1,4 +1,7 @@
 import { Viewable } from "./viewable";
+import { MakerspaceGallery } from '../models/makerspace-gallery';
+import { Observable } from 'rxjs/Observable'
+
 
 export class MakerspaceProject extends Viewable {
   title: string;

@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { DataService } from '../data.service';
 import { Router } from '@angular/router';
 import { MakerspaceGallery } from '../models/makerspace-gallery';
+import { MakerspaceImage } from '../models/makerspace-image';
 
 
 @Component({
@@ -29,6 +30,8 @@ export class ProjectComponent implements OnInit {
   gallery: any;
   galleryData: Subscription;
   addSuccess: any;
+  addImage: Array<string>;
+  add: Array<MakerspaceImage> = new Array<MakerspaceImage>();
 
   project: MakerspaceProject = new MakerspaceProject();
   update: MakerspaceProject = new MakerspaceProject();
@@ -91,12 +94,28 @@ export class ProjectComponent implements OnInit {
     console.log(this.selected.id);
     console.log(this.ds.getCurrentUser().id);
 
-    this.galleryData = this.angularFire.list('/galleries/' + this.ds.getCurrentUser().id + '/' + this.selected.id).valueChanges().subscribe(
+    this.galleryData = this.angularFire.list('/projectImages/' + this.selected.id).valueChanges().subscribe(
       gallery => gallery.forEach(item => {
         this.gallery = item;
-        console.log(this.gallery);
+        console.log(this.gallery.imageUrl);
+        var c = this.gallery.imageUrl;
+        this.addImage = new Array<string>();
+        this.addImage.push(c);
+
       }));
-    
+  
+   /* this.ds.getProjectImages(this.selected.id).subscribe(
+      gallery => (item => {
+
+        this.gallery = item;
+        console.log(this.gallery.imageUrl);
+        this.addImage.push(this.gallery.imageUrl);
+
+      
+      }));
+
+    console.log(this.addImage);*/
+
   }
 
   updateProject(project) {

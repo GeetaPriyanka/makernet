@@ -56,16 +56,16 @@ export class MakerSpaceReservationComponent implements OnInit {
   ngOnInit() {
 
   
-    this.SpaceSubscription = this.angularFire.list('/Reservation').valueChanges().subscribe(
-      reservation => {
-        this.reservation = reservation;
+    this.SpaceSubscription = this.angularFire.list('/Reservation/Space1').valueChanges().subscribe(
+      space1 => {
+        this.space1 = space1;
       });
   }
 
- async asyncAwait(f: NgForm) {
+  async asyncAwait1(f: NgForm) {
     console.log(this.searchForReservation);
     var a = this;
-    
+
 
     return new Promise(function (resolve, reject) {
 
@@ -82,11 +82,24 @@ export class MakerSpaceReservationComponent implements OnInit {
             console.log(a.count);
             console.log(a.countSpace1);
             resolve(true);
-
           }
 
         }));
 
+
+    });
+  }
+
+  async asyncAwait2(f: NgForm) {
+    console.log(this.searchForReservation);
+    var a = this;
+
+
+    return new Promise(function (resolve, reject) {
+
+      console.log(a.searchForReservation);
+      a.firebase = a.angularFire.list('/Reservation');
+      a.time = a.searchForReservation.hour + ":" + a.searchForReservation.min + " PM";
 
       a.SpaceSubscription = a.angularFire.list('/Reservation/Space2/').valueChanges().subscribe(
         space2 => space2.forEach(item => {
@@ -94,10 +107,26 @@ export class MakerSpaceReservationComponent implements OnInit {
           if (a.searchForReservation.date == a.space2.date && a.time == a.space2.time) {
             a.count += 1;
             a.countSpace2 += 1;
+            resolve(true);
+
           }
 
         }));
+      resolve(false);
 
+    });
+  }
+
+  async asyncAwait3(f: NgForm) {
+    console.log(this.searchForReservation);
+    var a = this;
+
+
+    return new Promise(function (resolve, reject) {
+
+      console.log(a.searchForReservation);
+      a.firebase = a.angularFire.list('/Reservation');
+      a.time = a.searchForReservation.hour + ":" + a.searchForReservation.min + " PM";
 
 
       a.SpaceSubscription = a.angularFire.list('/Reservation/Space3/').valueChanges().subscribe(
@@ -106,9 +135,26 @@ export class MakerSpaceReservationComponent implements OnInit {
           if (a.searchForReservation.date == a.space3.date && a.time == a.space3.time) {
             a.count += 1;
             a.countSpace3 += 1;
+            resolve(true);
+
           }
 
         }));
+      resolve(false);
+    });
+  }
+
+  async asyncAwait4(f: NgForm) {
+    console.log(this.searchForReservation);
+    var a = this;
+
+
+    return new Promise(function (resolve, reject) {
+
+      console.log(a.searchForReservation);
+      a.firebase = a.angularFire.list('/Reservation');
+      a.time = a.searchForReservation.hour + ":" + a.searchForReservation.min + " PM";
+
 
       a.SpaceSubscription = a.angularFire.list('/Reservation/Space4/').valueChanges().subscribe(
         space4 => space4.forEach(item => {
@@ -116,11 +162,13 @@ export class MakerSpaceReservationComponent implements OnInit {
           if (a.searchForReservation.date == a.space4.date && a.time == a.space4.time) {
             a.count += 1;
             a.countSpace4 += 1;
+            resolve(true);
+
           }
         }));
 
+      resolve(false);
     
-              
 
      });
 
@@ -148,27 +196,32 @@ export class MakerSpaceReservationComponent implements OnInit {
 
     }
     else {
-    let value = await this.asyncAwait(f);
+      let value1 = await this.asyncAwait1(f);
+      let value2 = await this.asyncAwait2(f);
+      let value3 = await this.asyncAwait3(f);
+      let value4 = await this.asyncAwait4(f);
 
-    if (value) {
-      console.log(this.countSpace1);
-
-      if (this.countSpace1 == 1) { console.log("no room in space1") }
+    
+      if (value1) { console.log("no room in space1"); }
+        else
+          this.availableList.push(new MakerspaceSpace("Space1", 4, "Woodward 334", this.time, this.searchForReservation.date));
+      
+     if (value2) { console.log("no room in space2"); }
+        else
+          this.availableList.push(new MakerspaceSpace("Space2", 5, "Woodward 334", this.time, this.searchForReservation.date));
+      
+     if (value3) {
+      console.log("no room in space3");
+     }
+     else
+          this.availableList.push(new MakerspaceSpace("Space3", 2, "Woodward 334", this.time, this.searchForReservation.date));
+      
+     if (value4) {
+       console.log("no room in space4");
+     }
       else
-        this.availableList.push(new MakerspaceSpace("Space1", 4, "Woodward 334", this.time, this.searchForReservation.date));
-
-      if (this.countSpace2 == 1) { }
-      else
-        this.availableList.push(new MakerspaceSpace("Space2", 5, "Woodward 334", this.time, this.searchForReservation.date));
-
-      if (this.countSpace3 == 1) { }
-      else
-        this.availableList.push(new MakerspaceSpace("Space3", 2, "Woodward 334", this.time, this.searchForReservation.date));
-
-      if (this.countSpace4 == 1) { }
-      else
-        this.availableList.push(new MakerspaceSpace("Space4", 3, "Woodward 334", this.time, this.searchForReservation.date));
-
+          this.availableList.push(new MakerspaceSpace("Space4", 3, "Woodward 334", this.time, this.searchForReservation.date));
+      
       console.log(this.count);
       if (this.count == 4) {
         this.noRooms = "no rooms are available at this time";
@@ -181,7 +234,7 @@ export class MakerSpaceReservationComponent implements OnInit {
 
 
         console.log(this.availableList);
-      }
+      
     }
     }
   }
