@@ -92,7 +92,6 @@ export class ProjectComponent implements OnInit {
     this.selected = new MakerspaceProject();
     this.selected = project;
     console.log(this.selected.id);
-    console.log(this.ds.getCurrentUser().id);
 
     this.galleryData = this.angularFire.list('/projectImages/' + this.selected.id).valueChanges().subscribe(
       gallery => gallery.forEach(item => {
