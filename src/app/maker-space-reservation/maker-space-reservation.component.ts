@@ -101,7 +101,6 @@ export class MakerSpaceReservationComponent implements OnInit {
 
 
 
-
       a.SpaceSubscription = a.angularFire.list('/Reservation/Space2/').valueChanges().subscribe(
         space2 => space2.forEach(item => {
           a.space2 = item;

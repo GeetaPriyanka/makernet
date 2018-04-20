@@ -45,10 +45,10 @@ export class GalleryComponent {
       this.currentUser = user;
     });
 
-    this.gallerySubscription = this.ds.getGalleriesByUser(this.currentUser.uid).subscribe(
+    /*this.gallerySubscription = this.ds.getGalleriesByUser(this.currentUser.uid).subscribe(
       galleries => {
         this.userGalleries = galleries;
-    });
+    }); */
   }
 
   logGalleries() {
