@@ -109,7 +109,7 @@
               <label>Desc:</label>
               <input type="text" placeholder="Description" [(ngModel)]="project.description" name="desc" />
             </div>
-            <div>
+            <!--<div>
               <input type="file" (change)="upload($event)" accept=".png,.jpg" />
 
             </div>
@@ -118,7 +118,7 @@
               <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                 Uploading...
               </div>
-            </div>
+            </div>-->
 
             <div>
               <button class="btn btn-success" [disabled]="!submitEnabled" (click)="onSubmit" onclick="document.getElementById('id01').style.display='none';">Submit</button>

@@ -77,14 +77,14 @@ export class ProjectComponent implements OnInit {
   }
 
  
-  upload(event) {
+ /* upload(event) {
     this.toggleSubmitEnabled();
     let upload = this.ds.uploadImage(event.target.files[0], 
     result => {
       this.project.imageUrl = result.url;
       this.toggleSubmitEnabled();
     });
-  }
+  }*/
 
   toggleSubmitEnabled() {
     this.submitEnabled = !this.submitEnabled;

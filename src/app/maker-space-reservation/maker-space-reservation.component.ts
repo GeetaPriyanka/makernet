@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone  } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { AngularFireStorage } from 'angularfire2/storage';
 import { Subscription } from 'rxjs/Subscription';
@@ -55,7 +55,7 @@ export class MakerSpaceReservationComponent implements OnInit {
   userSub: Subscription;
   currentUser: firebase.User;
 
-  constructor(private angularFire: AngularFireDatabase, private afStorage: AngularFireStorage, private ds: DataService) {
+  constructor(private angularFire: AngularFireDatabase, private zone: NgZone, private afStorage: AngularFireStorage, private ds: DataService) {
 
     this.firebase = this.angularFire.list('/Spaces');
   }
@@ -211,7 +211,12 @@ export class MakerSpaceReservationComponent implements OnInit {
         }
       }
 
+  onCloseAlert() {
 
+    this.zone.runOutsideAngular(() => {
+      location.reload();
+    });
+  }
   
 
   onSubmitReserve(f2: NgForm) {
@@ -232,10 +237,12 @@ export class MakerSpaceReservationComponent implements OnInit {
 
     this.firebase = this.angularFire.list('/Reservation/' + this.reservedSpace.value);
     this.confirmReservation = this.firebase.push(this.MakerspaceReservation);
-    if (this.confirmReservation)
+    if (this.confirmReservation) {
       this.confirmed = true;
-      
+     
+    }
 
   }
+ 
 }
 
