@@ -43,7 +43,7 @@ export class MakerSpaceReservationComponent implements OnInit {
   confirmReservation: any; confirmed: any;
   time: string;
 
-  currentDate: string;
+  currentDate: any;
   currentTime: string;
   chooseCorrectDate: any;
   chooseCorrectTime: any;
@@ -148,20 +148,24 @@ export class MakerSpaceReservationComponent implements OnInit {
   async onSubmit(f: NgForm) {
     console.log("print me");
     console.log(this.searchForReservation);
+    var dt = new Date();
 
-    this.currentDate = new Date().toJSON().substring(0, 10);
     this.currentTime = new Date().toLocaleTimeString().substring(0, 4);
-
+    var offset = -300; //Timezone offset for EST in minutes.
+    this.currentDate = new Date(dt.getTime() + offset * 60 * 1000).toJSON().substring(0, 10);
     console.log(this.currentDate);
     console.log(this.currentTime);
+    console.log(this.searchForReservation.date);
 
     if (this.currentDate > this.searchForReservation.date) {
       this.chooseCorrectDate = true;
       console.log(this.chooseCorrectDate);
     }
     else if (this.currentDate == this.searchForReservation.date) {
-      if (this.currentTime > (this.searchForReservation.hour + ":" + this.searchForReservation.min))
+      if (this.currentTime > (this.searchForReservation.hour + ":" + this.searchForReservation.min)) {
         this.chooseCorrectTime = true;
+        console.log(this.chooseCorrectTime);
+      }
       else
         this.run(f);
     }
